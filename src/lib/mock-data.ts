@@ -1,0 +1,53 @@
+import type { CampaignMetric } from "./google-ads";
+
+/** Sample data shown when Google Ads credentials aren't configured yet, so the UI is visible from the start. */
+export const mockCampaignMetrics: CampaignMetric[] = [
+  {
+    campaignId: "1001",
+    campaignName: "Brand Search",
+    status: "ENABLED",
+    impressions: 84210,
+    clicks: 4310,
+    costMicros: 612_450_000,
+    conversions: 212,
+    conversionsValue: 18_940,
+    ctr: 0.0512,
+    averageCpc: 142_000,
+  },
+  {
+    campaignId: "1002",
+    campaignName: "Generic Search",
+    status: "ENABLED",
+    impressions: 231_540,
+    clicks: 6120,
+    costMicros: 1_284_300_000,
+    conversions: 156,
+    conversionsValue: 11_020,
+    ctr: 0.0264,
+    averageCpc: 209_000,
+  },
+  {
+    campaignId: "1003",
+    campaignName: "Performance Max",
+    status: "ENABLED",
+    impressions: 512_980,
+    clicks: 9840,
+    costMicros: 2_105_700_000,
+    conversions: 340,
+    conversionsValue: 29_710,
+    ctr: 0.0192,
+    averageCpc: 214_000,
+  },
+  {
+    campaignId: "1004",
+    campaignName: "Remarketing Display",
+    status: "PAUSED",
+    impressions: 1_204_300,
+    clicks: 3210,
+    costMicros: 384_900_000,
+    conversions: 41,
+    conversionsValue: 2_860,
+    ctr: 0.0027,
+    averageCpc: 120_000,
+  },
+];
