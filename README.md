@@ -1,10 +1,13 @@
 # Paddington Dashboard — Google Ads
 
-A Next.js dashboard that pulls campaign performance data from the Google Ads API.
+A Next.js dashboard for Google Ads campaign performance. No API setup
+required for day-to-day use: you export a CSV from Google Ads and drop it
+into the dashboard, and it renders KPIs, charts, and a campaign table —
+matching the look of the original static report. Optionally add a CRM leads
+export to get per-campaign CPL.
 
-Without credentials configured, the dashboard runs with sample data so the UI is
-visible immediately. Once you add real credentials it switches to live data
-automatically.
+The dashboard runs entirely in the browser: files are parsed client-side and
+saved to your browser's local storage, so nothing is uploaded to a server.
 
 ## Getting started
 
@@ -13,91 +16,71 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000.
+Open http://localhost:3000, then upload files as described below.
 
-## Connecting a real Google Ads account
+## Using it
 
-You need four things: an OAuth client, a developer token, a refresh token, and
-the customer ID of the account you want to read.
+### 1. Export the campaigns report from Google Ads
 
-### 1. Create a Google Cloud OAuth client
+In Google Ads: **Campaigns** tab → select the date range you want → the
+download icon (top-right of the table) → **CSV**.
 
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/), create
-   (or pick) a project.
-2. Enable the **Google Ads API** under "APIs & Services" → "Library".
-3. Under "APIs & Services" → "Credentials", create an **OAuth client ID** of
-   type "Desktop app".
-4. Copy the **Client ID** and **Client secret**.
+Drop that file onto **"Отчёт по кампаниям"** in the dashboard. Required
+columns (English or Russian headers both work): Campaign, Campaign state,
+Impr., Clicks, Cost, Conversions. A Day/Date column is optional — without it
+you still get all totals and the per-campaign breakdown, just not the
+day-by-day chart.
 
-### 2. Get a developer token
+### 2. (Optional) Export leads from your CRM
 
-1. Sign in to your [Google Ads](https://ads.google.com/) account (needs to be
-   a Manager/MCC account for API access).
-2. Go to **Tools & Settings → Setup → API Center**.
-3. Copy the **developer token**. New tokens start in test-account access —
-   fine for development. Apply for Basic/Standard access before going to
-   production with a real account.
+Any CSV with a campaign/source column works — column names are matched
+loosely (`Campaign`, `UTM Campaign`, `Source`, etc.), plus optional `Date`
+and `Form` columns. Drop it onto **"Лиды из CRM"**.
 
-### 3. Get a refresh token
+**Important:** campaign names in the leads file must match the campaign
+names in the Google Ads export exactly, or those leads won't be attributed
+to a campaign (the dashboard warns you when this happens, on the Leads tab).
 
-Run the included helper script with your OAuth client credentials:
+### 3. Set your currency
 
-```bash
-GOOGLE_ADS_CLIENT_ID=xxx GOOGLE_ADS_CLIENT_SECRET=yyy node scripts/get-refresh-token.mjs
-```
+Type the 3-letter currency code (default `USD`) next to the upload boxes —
+it only affects how numbers are formatted, not the data itself.
 
-It prints a URL — open it, sign in with the Google account that has access to
-the Ads account, approve access, and the script prints a refresh token in the
-terminal.
-
-### 4. Find your customer ID
-
-The 10-digit ID shown top-right in the Google Ads UI (e.g. `123-456-7890` →
-use `1234567890`, no dashes). If that account sits under a Manager account
-(MCC), also set `GOOGLE_ADS_LOGIN_CUSTOMER_ID` to the manager account's ID.
-
-### 5. Configure the app
-
-```bash
-cp .env.example .env.local
-```
-
-Fill in `.env.local`:
-
-```
-GOOGLE_ADS_CLIENT_ID=...
-GOOGLE_ADS_CLIENT_SECRET=...
-GOOGLE_ADS_DEVELOPER_TOKEN=...
-GOOGLE_ADS_REFRESH_TOKEN=...
-GOOGLE_ADS_CUSTOMER_ID=...
-GOOGLE_ADS_LOGIN_CUSTOMER_ID=       # only if the account is under an MCC
-```
-
-Restart `npm run dev` — the dashboard now pulls live campaign metrics.
-
-`.env.local` is git-ignored; never commit real credentials.
+That's it — the KPI row, "Обзор" (overview), "Кампании" (campaigns), and
+"Лиды" (leads) tabs populate automatically. Re-uploading a file replaces
+that dataset; "Очистить загруженные данные" resets everything.
 
 ## How it works
 
-- `src/lib/google-ads.ts` — Google Ads API client (via
-  [`google-ads-api`](https://github.com/Opteo/google-ads-api)) and a GAQL
-  query pulling per-campaign metrics (impressions, clicks, cost, conversions,
-  CTR, avg. CPC).
-- `src/app/api/google-ads/campaigns/route.ts` — API route the frontend calls;
-  falls back to sample data (`src/lib/mock-data.ts`) when credentials aren't
-  set, so the UI works before any setup.
-- `src/components/Dashboard.tsx` — client component: date-range picker, stat
-  tiles, a spend-by-campaign chart, and a campaigns table.
+- `src/lib/parse-google-ads-csv.ts` / `parse-leads-csv.ts` — CSV parsers.
+  Google Ads exports have a couple of metadata lines before the real header
+  row and a trailing "Total" row — the parser scans for the row that
+  actually has recognizable column names and ignores the rest. Numbers with
+  thousands separators, currency symbols, or `%` are normalized.
+- `src/lib/aggregate.ts` — turns raw rows into per-campaign summaries, KPI
+  totals, and a daily spend/leads series.
+- `src/lib/dataset-storage.ts` — persists the parsed dataset to
+  `localStorage` so it survives a page reload.
+- `src/components/Dashboard.tsx` and friends — the tabbed UI (Обзор /
+  Кампании / Лиды), stat tiles, and charts (Recharts).
+
+## Also included: direct Google Ads API integration
+
+The repo also has a working Google Ads API client (`src/lib/google-ads.ts`)
+and an API route (`/api/google-ads/campaigns`) for pulling data live via
+OAuth instead of manual CSV exports — useful if you want the dashboard to
+auto-refresh without anyone uploading files. It's not wired into the main
+page right now (the CSV flow above is simpler to get running), but the
+pieces are there if you want to switch to it later. See git history for
+`.env.example` and `scripts/get-refresh-token.mjs`, which walk through
+getting a developer token, OAuth client, and refresh token.
 
 ## Scaling this up
 
-- **Caching / rate limits**: the Google Ads API has query quotas. For a
-  dashboard used by multiple people, add a scheduled job (cron / a queue
-  worker) that pulls data periodically into a database (Postgres, BigQuery),
-  and have the API route read from there instead of calling Google Ads on
-  every page load.
-- **Multiple accounts**: loop `fetchCampaignMetrics` over several customer IDs
-  under one MCC, or use `search_stream` for large accounts.
+- **Multi-user / shared dashboard**: right now data lives in the browser's
+  local storage, so it's private to whoever uploaded it. For a dashboard
+  shared across a team, swap `dataset-storage.ts` for an API route that
+  stores the parsed dataset in a database, and everyone reads from there.
 - **No-code alternative**: for a quick dashboard without custom code, Google
-  Ads' built-in connector to **Looker Studio** or a **BigQuery Data Transfer**
-  export are viable alternatives.
+  Ads' built-in connector to **Looker Studio** or a **BigQuery Data
+  Transfer** export are viable alternatives.

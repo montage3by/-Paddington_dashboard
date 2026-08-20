@@ -1,9 +1,13 @@
-export function formatCurrency(micros: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(micros / 1_000_000);
+export function formatCurrency(value: number, currency: string = "USD"): string {
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency,
+      maximumFractionDigits: value >= 1000 ? 0 : 2,
+    }).format(value);
+  } catch {
+    return `${formatNumber(value)} ${currency}`;
+  }
 }
 
 export function formatNumber(value: number): string {
