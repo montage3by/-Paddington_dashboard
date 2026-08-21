@@ -54,7 +54,7 @@ export function Dashboard() {
             alt="Paddington Park ELC"
             width={963}
             height={229}
-            className="h-[210px] w-auto"
+            className="h-auto w-full max-w-[520px]"
             priority
           />
           <div>
