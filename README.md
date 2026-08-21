@@ -75,6 +75,24 @@ pieces are there if you want to switch to it later. See git history for
 `.env.example` and `scripts/get-refresh-token.mjs`, which walk through
 getting a developer token, OAuth client, and refresh token.
 
+## Deploying on Railway
+
+The repo includes a `railway.json` (Nixpacks builder, `npm run start` as the
+start command) so Railway can deploy it with no extra config.
+
+1. Push this repo to GitHub (already done if you're reading this from the
+   deployed branch).
+2. In [Railway](https://railway.app): **New Project → Deploy from GitHub
+   repo** → pick this repository.
+3. Railway auto-detects Node.js, runs `npm install` and `npm run build`, then
+   starts the app with `npm run start`. It sets `PORT` itself — `next start`
+   picks that up automatically, nothing to configure.
+4. Once deployed, open the generated `*.up.railway.app` URL — the dashboard
+   is empty until someone uploads the Google Ads CSV (and optional CRM leads
+   CSV) described above. Remember data is stored per-browser in
+   `localStorage`, so each visitor uploads their own files.
+5. Any push to the connected branch triggers a new deploy automatically.
+
 ## Scaling this up
 
 - **Multi-user / shared dashboard**: right now data lives in the browser's
