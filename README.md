@@ -1,13 +1,10 @@
 # Paddington Dashboard — Google Ads
 
-A Next.js dashboard for Google Ads campaign performance. No API setup
-required for day-to-day use: you export a CSV from Google Ads and drop it
-into the dashboard, and it renders KPIs, charts, and a campaign table —
-matching the look of the original static report. Optionally add a CRM leads
-export to get per-campaign CPL.
-
-The dashboard runs entirely in the browser: files are parsed client-side and
-saved to your browser's local storage, so nothing is uploaded to a server.
+A Next.js dashboard for Paddington Park ELC's Google Ads performance. It's a
+static, read-only site: there is no upload UI and no per-visitor state.
+Everyone who opens it sees the same report, and the data comes from one file
+in the repo — updates happen by editing that file and pushing (or asking
+Claude to update it), not by anyone uploading a CSV in the browser.
 
 ## Getting started
 
@@ -16,62 +13,35 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000, then upload files as described below.
+Open http://localhost:3000.
 
-## Using it
+## Updating the numbers
 
-### 1. Export the campaigns report from Google Ads
+All report data lives in **`src/data/report.ts`**: campaign rows, leads
+(by campaign / by form), the daily spend+leads series, the period-comparison
+table, and the YouTube Shorts stats. Edit the values there, commit, and push
+— the KPI tiles, charts, and tables on all four tabs (Обзор / Кампании /
+Лиды / YouTube Shorts) recompute automatically from those arrays via
+`src/lib/aggregate.ts`.
 
-In Google Ads: **Campaigns** tab → select the date range you want → the
-download icon (top-right of the table) → **CSV**.
-
-Drop that file onto **"Отчёт по кампаниям"** in the dashboard. Required
-columns (English or Russian headers both work): Campaign, Campaign state,
-Impr., Clicks, Cost, Conversions. A Day/Date column is optional — without it
-you still get all totals and the per-campaign breakdown, just not the
-day-by-day chart.
-
-### 2. (Optional) Export leads from your CRM
-
-Any CSV with a campaign/source column works — column names are matched
-loosely (`Campaign`, `UTM Campaign`, `Source`, etc.), plus optional `Date`
-and `Form` columns. Drop it onto **"Лиды из CRM"**.
-
-**Important:** campaign names in the leads file must match the campaign
-names in the Google Ads export exactly, or those leads won't be attributed
-to a campaign (the dashboard warns you when this happens, on the Leads tab).
-
-### 3. Set your currency
-
-Type the 3-letter currency code (default `USD`) next to the upload boxes —
-it only affects how numbers are formatted, not the data itself.
-
-That's it — the KPI row, "Обзор" (overview), "Кампании" (campaigns), and
-"Лиды" (leads) tabs populate automatically. Re-uploading a file replaces
-that dataset; "Очистить загруженные данные" resets everything.
+There's no CSV upload, no `localStorage`, and no per-visitor data — this is
+intentional: it's a single shared report, not a personal tool.
 
 ## How it works
 
-- `src/lib/parse-google-ads-csv.ts` / `parse-leads-csv.ts` — CSV parsers.
-  Google Ads exports have a couple of metadata lines before the real header
-  row and a trailing "Total" row — the parser scans for the row that
-  actually has recognizable column names and ignores the rest. Numbers with
-  thousands separators, currency symbols, or `%` are normalized.
-- `src/lib/aggregate.ts` — turns raw rows into per-campaign summaries, KPI
-  totals, and a daily spend/leads series.
-- `src/lib/dataset-storage.ts` — persists the parsed dataset to
-  `localStorage` so it survives a page reload.
-- `src/components/Dashboard.tsx` and friends — the tabbed UI (Обзор /
-  Кампании / Лиды), stat tiles, and charts (Recharts).
+- `src/data/report.ts` — the single source of truth for the current
+  reporting period's numbers.
+- `src/lib/aggregate.ts` — turns the raw campaign/lead rows into
+  per-campaign summaries and KPI totals.
+- `src/components/Dashboard.tsx` and friends — the tabbed UI, stat tiles,
+  and charts (Recharts).
 
 ## Also included: direct Google Ads API integration
 
 The repo also has a working Google Ads API client (`src/lib/google-ads.ts`)
 and an API route (`/api/google-ads/campaigns`) for pulling data live via
-OAuth instead of manual CSV exports — useful if you want the dashboard to
-auto-refresh without anyone uploading files. It's not wired into the main
-page right now (the CSV flow above is simpler to get running), but the
-pieces are there if you want to switch to it later. See git history for
+OAuth — useful if this should eventually auto-refresh instead of being
+edited by hand. It's not wired into the main page. See git history for
 `.env.example` and `scripts/get-refresh-token.mjs`, which walk through
 getting a developer token, OAuth client, and refresh token.
 
@@ -87,18 +57,17 @@ start command) so Railway can deploy it with no extra config.
 3. Railway auto-detects Node.js, runs `npm install` and `npm run build`, then
    starts the app with `npm run start`. It sets `PORT` itself — `next start`
    picks that up automatically, nothing to configure.
-4. Once deployed, open the generated `*.up.railway.app` URL — the dashboard
-   is empty until someone uploads the Google Ads CSV (and optional CRM leads
-   CSV) described above. Remember data is stored per-browser in
-   `localStorage`, so each visitor uploads their own files.
-5. Any push to the connected branch triggers a new deploy automatically.
+4. Any push to the connected branch triggers a new deploy automatically —
+   so updating `src/data/report.ts` and pushing is all it takes to refresh
+   the live site.
 
 ## Scaling this up
 
-- **Multi-user / shared dashboard**: right now data lives in the browser's
-  local storage, so it's private to whoever uploaded it. For a dashboard
-  shared across a team, swap `dataset-storage.ts` for an API route that
-  stores the parsed dataset in a database, and everyone reads from there.
+- **Live data instead of hand-edited**: wire up the Google Ads API client
+  mentioned above (and a CRM export/API for leads) behind a scheduled job or
+  the existing `/api/google-ads/campaigns` route, and have it write into
+  `src/data/report.ts` (or a database `Dashboard` reads from) instead of
+  editing it by hand each period.
 - **No-code alternative**: for a quick dashboard without custom code, Google
   Ads' built-in connector to **Looker Studio** or a **BigQuery Data
   Transfer** export are viable alternatives.
