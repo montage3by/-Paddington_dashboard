@@ -48,13 +48,13 @@ export function Dashboard() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
       <div className="mb-6 flex flex-wrap items-start justify-between gap-3">
-        <div className="flex items-start gap-3">
+        <div className="flex items-center gap-4">
           <Image
             src="/logo-pad.png"
             alt="Paddington Park ELC"
-            width={140}
-            height={33}
-            className="mt-0.5 h-8 w-auto"
+            width={963}
+            height={229}
+            className="h-[210px] w-auto"
             priority
           />
           <div>
