@@ -50,7 +50,7 @@ export function Dashboard() {
       <div className="mb-6 flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-4">
           <Image
-            src="/logo-pad.png"
+            src="/logo-pad-v2.png"
             alt="Paddington Park ELC"
             width={963}
             height={229}
