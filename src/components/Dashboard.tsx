@@ -2,9 +2,17 @@
 
 import { useMemo, useState } from "react";
 import type { Dataset } from "@/lib/types";
-import { calculateTotals, leadsByForm, summarizeCampaigns } from "@/lib/aggregate";
+import { calculateTotals, dailySeries, leadsByForm, summarizeCampaigns } from "@/lib/aggregate";
 import { formatCurrency, formatNumber, formatPercent } from "@/lib/format";
-import { REPORT_CURRENCY, defaultPeriodKey, periodComparison, periods } from "@/data/report";
+import {
+  DATA_MAX_DATE,
+  DATA_MIN_DATE,
+  REPORT_CURRENCY,
+  campaignRows,
+  leadRows,
+  periodComparison,
+  youtubeLifetimeStats,
+} from "@/data/report";
 import Image from "next/image";
 import { StatTile } from "./StatTile";
 import { OverviewChart } from "./OverviewChart";
@@ -16,32 +24,63 @@ import { LeadsByDayChart } from "./LeadsByDayChart";
 
 type Tab = "overview" | "campaigns" | "leads" | "youtube";
 
+const currentMonthStart = DATA_MAX_DATE.slice(0, 7) + "-01";
+const DEFAULT_START = currentMonthStart >= DATA_MIN_DATE ? currentMonthStart : DATA_MIN_DATE;
+
+function inRange(date: string | null, start: string, end: string): boolean {
+  return date === null || (date >= start && date <= end);
+}
+
+function formatRangeLabel(start: string, end: string): string {
+  const fmt = (d: string) => {
+    const [, m, day] = d.split("-");
+    const months = ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
+    return `${parseInt(day, 10)} ${months[parseInt(m, 10) - 1]}`;
+  };
+  return `${fmt(start)} – ${fmt(end)} ${end.slice(0, 4)}`;
+}
+
 export function Dashboard() {
   const [tab, setTab] = useState<Tab>("overview");
-  const [periodKey, setPeriodKey] = useState<string>(defaultPeriodKey);
+  const [rangeStart, setRangeStart] = useState(DEFAULT_START);
+  const [rangeEnd, setRangeEnd] = useState(DATA_MAX_DATE);
   const currency = REPORT_CURRENCY;
 
-  const period = useMemo(
-    () => periods.find((p) => p.key === periodKey) ?? periods[0],
-    [periodKey]
-  );
-
-  const dataset: Dataset = useMemo(
-    () => ({
+  const dataset: Dataset = useMemo(() => {
+    const campaigns = campaignRows.filter((r) => inRange(r.date, rangeStart, rangeEnd));
+    const leads = leadRows.filter((r) => inRange(r.date, rangeStart, rangeEnd));
+    return {
       currency,
-      campaigns: period.campaignRows,
-      leads: period.leadRows,
+      campaigns,
+      leads,
       campaignsFileName: null,
       leadsFileName: null,
       uploadedAt: new Date().toISOString(),
-    }),
-    [currency, period]
-  );
+    };
+  }, [currency, rangeStart, rangeEnd]);
 
   const campaigns = useMemo(() => summarizeCampaigns(dataset), [dataset]);
   const activeCampaigns = useMemo(() => campaigns.filter((c) => c.cost > 0), [campaigns]);
   const totals = useMemo(() => calculateTotals(dataset), [dataset]);
   const formBreakdown = useMemo(() => leadsByForm(dataset.leads), [dataset]);
+  const daily = useMemo(() => dailySeries(dataset), [dataset]);
+  const leadsPerDay = useMemo(
+    () => daily.filter((d) => d.leads > 0).map((d) => ({ date: d.date, leads: d.leads })),
+    [daily]
+  );
+
+  const youtube = campaigns.find((c) => c.campaign === "Youtube Shorts") ?? null;
+  const searchOnly = useMemo(() => {
+    const impressions = totals.impressions - (youtube?.impressions ?? 0);
+    const clicks = totals.clicks - (youtube?.clicks ?? 0);
+    const cost = totals.cost - (youtube?.cost ?? 0);
+    return { impressions, clicks, cost, ctr: impressions > 0 ? clicks / impressions : 0 };
+  }, [totals, youtube]);
+
+  function setPreset(start: string, end: string) {
+    setRangeStart(start);
+    setRangeEnd(end);
+  }
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-10">
@@ -57,7 +96,7 @@ export function Dashboard() {
           />
           <div>
             <div className="text-xs text-[var(--text-secondary)]">
-              Paddington Park ELC · Google Ads · {period.label}
+              Paddington Park ELC · Google Ads · {formatRangeLabel(rangeStart, rangeEnd)}
             </div>
             <h1 className="text-xl font-medium text-[var(--text-primary)]">
               Дашборд по рекламным кампаниям
@@ -72,22 +111,56 @@ export function Dashboard() {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="flex gap-1.5">
-          {periods.map((p) => (
-            <button
-              key={p.key}
-              type="button"
-              onClick={() => setPeriodKey(p.key)}
-              className={`rounded-lg border px-3.5 py-1.5 text-xs ${
-                periodKey === p.key
-                  ? "border-[var(--series-1)] bg-[var(--surface)] font-medium text-[var(--series-1)]"
-                  : "border-[var(--border)] bg-[var(--gridline)] text-[var(--text-secondary)]"
-              }`}
-            >
-              {p.label.split(" ").slice(-2).join(" ")}
-            </button>
-          ))}
+      <div className="mb-6 flex flex-wrap items-end gap-3 rounded-lg border border-[var(--border)] bg-[var(--gridline)] px-4 py-3">
+        <div>
+          <label className="block text-[11px] text-[var(--text-secondary)]">С даты</label>
+          <input
+            type="date"
+            value={rangeStart}
+            min={DATA_MIN_DATE}
+            max={rangeEnd}
+            onChange={(e) => setRangeStart(e.target.value)}
+            className="mt-0.5 rounded-md border border-[var(--border)] bg-[var(--surface)] px-2 py-1 text-xs text-[var(--text-primary)]"
+          />
+        </div>
+        <div>
+          <label className="block text-[11px] text-[var(--text-secondary)]">По дату</label>
+          <input
+            type="date"
+            value={rangeEnd}
+            min={rangeStart}
+            max={DATA_MAX_DATE}
+            onChange={(e) => setRangeEnd(e.target.value)}
+            className="mt-0.5 rounded-md border border-[var(--border)] bg-[var(--surface)] px-2 py-1 text-xs text-[var(--text-primary)]"
+          />
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          <button
+            type="button"
+            onClick={() => setPreset(currentMonthStart, DATA_MAX_DATE)}
+            className="rounded-md border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-xs text-[var(--text-secondary)]"
+          >
+            Текущий месяц
+          </button>
+          <button
+            type="button"
+            onClick={() => setPreset("2026-08-01", "2026-08-31")}
+            className="rounded-md border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-xs text-[var(--text-secondary)]"
+          >
+            Август
+          </button>
+          <button
+            type="button"
+            onClick={() => setPreset(DATA_MIN_DATE, DATA_MAX_DATE)}
+            className="rounded-md border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-xs text-[var(--text-secondary)]"
+          >
+            Весь период
+          </button>
+        </div>
+        <div className="ml-auto text-[11px] text-[var(--text-secondary)]">
+          Данные обновлены по {formatRangeLabel(DATA_MAX_DATE, DATA_MAX_DATE).split(" ").slice(0, 2).join(" ")}
         </div>
       </div>
 
@@ -102,7 +175,7 @@ export function Dashboard() {
           label="CPL"
           value={totals.cpl != null ? formatCurrency(totals.cpl, currency) : "—"}
         />
-        <StatTile label="YouTube views" value={formatNumber(period.youtubeStats.viewsTotal)} />
+        <StatTile label="YouTube views" value={formatNumber(youtubeLifetimeStats.viewsTotal)} />
       </div>
 
       <div className="mb-4 flex flex-wrap gap-1.5">
@@ -136,7 +209,11 @@ export function Dashboard() {
               <div className="mb-3 text-sm font-medium text-[var(--text-primary)]">
                 Расход и лиды по дням
               </div>
-              <OverviewChart data={period.dailyOverview} currency={currency} />
+              {daily.length > 0 ? (
+                <OverviewChart data={daily} currency={currency} />
+              ) : (
+                <p className="text-sm text-[var(--text-secondary)]">Нет данных за выбранный период.</p>
+              )}
             </div>
 
             <div>
@@ -145,22 +222,20 @@ export function Dashboard() {
                 <div className="rounded-lg bg-[var(--gridline)] px-4 py-3">
                   <div className="text-xs text-[var(--text-secondary)]">Search campaigns</div>
                   <div className="mt-1 text-lg font-medium text-[var(--text-primary)]">
-                    {formatCurrency(period.channelSummary.search.cost, currency)}
+                    {formatCurrency(searchOnly.cost, currency)}
                   </div>
                   <div className="text-xs text-[var(--text-secondary)]">
-                    {formatNumber(period.channelSummary.search.clicks)} клика ·{" "}
-                    {formatNumber(period.channelSummary.search.impressions)} показов
+                    {formatNumber(searchOnly.clicks)} клика · {formatNumber(searchOnly.impressions)} показов
                   </div>
                 </div>
                 <div className="rounded-lg bg-[var(--gridline)] px-4 py-3">
                   <div className="text-xs text-[var(--text-secondary)]">YouTube Shorts</div>
                   <div className="mt-1 text-lg font-medium text-[var(--text-primary)]">
-                    {formatCurrency(period.channelSummary.youtube.cost, currency)}
+                    {formatCurrency(youtube?.cost ?? 0, currency)}
                   </div>
                   <div className="text-xs text-[var(--text-secondary)]">
-                    {formatNumber(period.channelSummary.youtube.views)} views ·{" "}
-                    {formatNumber(period.channelSummary.youtube.clicks)} клика ·{" "}
-                    {formatNumber(period.channelSummary.youtube.impressions)} показов
+                    {formatNumber(youtube?.clicks ?? 0)} клика ·{" "}
+                    {formatNumber(youtube?.impressions ?? 0)} показов
                   </div>
                 </div>
               </div>
@@ -235,7 +310,11 @@ export function Dashboard() {
               <div className="mb-3 text-sm font-medium text-[var(--text-primary)]">
                 Лиды по дням
               </div>
-              <LeadsByDayChart data={period.leadsByDay} />
+              {leadsPerDay.length > 0 ? (
+                <LeadsByDayChart data={leadsPerDay} />
+              ) : (
+                <p className="text-sm text-[var(--text-secondary)]">Нет лидов за выбранный период.</p>
+              )}
             </div>
             <div>
               <div className="mb-3 text-sm font-medium text-[var(--text-primary)]">
@@ -249,15 +328,20 @@ export function Dashboard() {
         {tab === "youtube" && (
           <div className="flex flex-col gap-6">
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              <StatTile label="Views (всего)" value={formatNumber(period.youtubeStats.viewsTotal)} />
-              <StatTile label="Views (48h)" value={formatNumber(period.youtubeStats.views48h)} />
-              <StatTile label="Показы (GA)" value={formatNumber(period.youtubeStats.impressionsGA)} />
-              <StatTile label="Клики (GA)" value={formatNumber(period.youtubeStats.clicksGA)} />
-              <StatTile label="Расход" value={formatCurrency(period.youtubeStats.spend, currency)} />
-              <StatTile label="Досмотры" value={period.youtubeStats.retention} />
-              <StatTile label="Avg. duration" value={period.youtubeStats.avgDuration} />
-              <StatTile label="Traffic source" value={period.youtubeStats.trafficSource} />
+              <StatTile label="Показы (GA)" value={formatNumber(youtube?.impressions ?? 0)} />
+              <StatTile label="Клики (GA)" value={formatNumber(youtube?.clicks ?? 0)} />
+              <StatTile label="Расход" value={formatCurrency(youtube?.cost ?? 0, currency)} />
+              <StatTile label="Views (всего)" value={formatNumber(youtubeLifetimeStats.viewsTotal)} />
+              <StatTile label="Views (48h)" value={formatNumber(youtubeLifetimeStats.views48h)} />
+              <StatTile label="Досмотры" value={youtubeLifetimeStats.retention} />
+              <StatTile label="Avg. duration" value={youtubeLifetimeStats.avgDuration} />
+              <StatTile label="Traffic source" value={youtubeLifetimeStats.trafficSource} />
             </div>
+            <p className="text-xs text-[var(--text-secondary)]">
+              Views/досмотры/avg. duration — данные YouTube Studio за весь прогон кампании (
+              {youtubeLifetimeStats.runDates}), не режутся по выбранному периоду. Показы, клики и
+              расход выше — по выбранному периоду из Google Ads.
+            </p>
 
             <div className="overflow-x-auto rounded-lg border border-[var(--border)]">
               <table className="w-full min-w-[480px] text-sm">
@@ -272,55 +356,37 @@ export function Dashboard() {
                   <tr className="border-b border-[var(--border)]">
                     <td className="px-4 py-3 text-[var(--text-primary)]">Расход</td>
                     <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {formatCurrency(period.searchYoutubeComparison.youtube.cost, currency)}
+                      {formatCurrency(youtube?.cost ?? 0, currency)}
                     </td>
                     <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {formatCurrency(period.searchYoutubeComparison.search.cost, currency)}
+                      {formatCurrency(searchOnly.cost, currency)}
                     </td>
                   </tr>
                   <tr className="border-b border-[var(--border)]">
                     <td className="px-4 py-3 text-[var(--text-primary)]">Показы</td>
                     <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {formatNumber(period.searchYoutubeComparison.youtube.impressions)}
+                      {formatNumber(youtube?.impressions ?? 0)}
                     </td>
                     <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {formatNumber(period.searchYoutubeComparison.search.impressions)}
+                      {formatNumber(searchOnly.impressions)}
                     </td>
                   </tr>
                   <tr className="border-b border-[var(--border)]">
                     <td className="px-4 py-3 text-[var(--text-primary)]">Клики</td>
                     <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {formatNumber(period.searchYoutubeComparison.youtube.clicks)}
+                      {formatNumber(youtube?.clicks ?? 0)}
                     </td>
                     <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {formatNumber(period.searchYoutubeComparison.search.clicks)}
-                    </td>
-                  </tr>
-                  <tr className="border-b border-[var(--border)]">
-                    <td className="px-4 py-3 text-[var(--text-primary)]">CTR</td>
-                    <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {period.searchYoutubeComparison.youtube.ctr}
-                    </td>
-                    <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {period.searchYoutubeComparison.search.ctr}
-                    </td>
-                  </tr>
-                  <tr className="border-b border-[var(--border)]">
-                    <td className="px-4 py-3 text-[var(--text-primary)]">Лиды (CRM)</td>
-                    <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {period.searchYoutubeComparison.youtube.leads}
-                    </td>
-                    <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {period.searchYoutubeComparison.search.leads}
+                      {formatNumber(searchOnly.clicks)}
                     </td>
                   </tr>
                   <tr>
-                    <td className="px-4 py-3 text-[var(--text-primary)]">Стратегия</td>
+                    <td className="px-4 py-3 text-[var(--text-primary)]">CTR</td>
                     <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {period.searchYoutubeComparison.youtube.strategy}
+                      {formatPercent(youtube ? youtube.ctr : 0)}
                     </td>
                     <td className="px-4 py-3 text-right text-[var(--text-primary)]">
-                      {period.searchYoutubeComparison.search.strategy}
+                      {formatPercent(searchOnly.ctr)}
                     </td>
                   </tr>
                 </tbody>
