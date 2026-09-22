@@ -8,15 +8,15 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
  * can be viewed.
  *
  * Campaign rows: Google Ads only reports period totals per campaign (no
- * daily breakdown), pulled from screenshots for five windows: 1–20 Aug
- * (pre-aggregated report), 20–28 Aug, 26–31 Aug, 1–7 Sep, and 8–14 Sep.
- * Each window's per-campaign totals are split evenly across that
- * window's days below — so day-level numbers within a window are an
+ * daily breakdown), pulled from screenshots for six windows: 1–20 Aug
+ * (pre-aggregated report), 20–28 Aug, 26–31 Aug, 1–7 Sep, 8–14 Sep, and
+ * 14–22 Sep. Each window's per-campaign totals are split evenly across
+ * that window's days below — so day-level numbers within a window are an
  * approximation, but any range that aligns with (or spans) whole windows
  * sums back to the real reported totals. The 20–28 and 26–31 Aug windows
- * overlap on 26–28 Aug, so those three days carry cost/impressions from
- * both windows (small double-count, accepted); September windows don't
- * overlap.
+ * overlap on 26–28 Aug, and 8–14 Sep / 14–22 Sep overlap on 14 Sep, so
+ * those days carry cost/impressions from both windows (small
+ * double-count, accepted).
  *
  * Lead rows: exact per-row dates from CRM exports for 20 Aug onward,
  * filtered to Google Ads (utm_source=google&utm_medium=cpc, attributed
@@ -36,7 +36,7 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
 
 export const REPORT_CURRENCY = "AED";
 export const DATA_MIN_DATE = "2026-08-01";
-export const DATA_MAX_DATE = "2026-09-14";
+export const DATA_MAX_DATE = "2026-09-22";
 
 function datesBetween(start: string, end: string): string[] {
   const dates: string[] = [];
@@ -72,6 +72,7 @@ const windowB = datesBetween("2026-08-20", "2026-08-28"); // screenshot totals f
 const windowC = datesBetween("2026-08-26", "2026-08-31"); // screenshot totals for 26–31 Aug
 const windowD = datesBetween("2026-09-01", "2026-09-07"); // screenshot totals for 1–7 Sep
 const windowE = datesBetween("2026-09-08", "2026-09-14"); // screenshot totals for 8–14 Sep (partial — see header note)
+const windowF = datesBetween("2026-09-14", "2026-09-22"); // screenshot totals for 14–22 Sep
 
 const CAMPAIGN = {
   genericDubai: "PPD | Search | Generic Dubai",
@@ -147,6 +148,18 @@ export const campaignRows: CampaignRow[] = [
   ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 515, clicks: 10, cost: 29.08 }, windowE),
   ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 26, clicks: 1, cost: 2.86 }, windowE),
   ...spread(CAMPAIGN.nearMe, "Активна", { impressions: 3644, clicks: 184, cost: 497.55 }, windowE),
+
+  // 14–22 Sep (screenshot totals, exact — cost derived from Impr × Avg.
+  // CPM / 1000, cross-checked against the account total, clicks and cost sums)
+  ...spread(CAMPAIGN.nearMe, "Активна", { impressions: 4561, clicks: 226, cost: 623.94 }, windowF),
+  ...spread(CAMPAIGN.eyfs, "Активна", { impressions: 2533, clicks: 161, cost: 439.06 }, windowF),
+  ...spread(CAMPAIGN.locationCore, "Активна", { impressions: 910, clicks: 75, cost: 333.81 }, windowF),
+  ...spread(CAMPAIGN.genericDubai, "Активна", { impressions: 1086, clicks: 74, cost: 1390.85 }, windowF),
+  ...spread(CAMPAIGN.ageSpecific, "Активна", { impressions: 1121, clicks: 65, cost: 960.27 }, windowF),
+  ...spread(CAMPAIGN.brand, "Активна", { impressions: 243, clicks: 62, cost: 51.44 }, windowF),
+  ...spread(CAMPAIGN.premium, "Активна", { impressions: 442, clicks: 31, cost: 169.65 }, windowF),
+  ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 458, clicks: 17, cost: 48.20 }, windowF),
+  ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 25, clicks: 2, cost: 5.83 }, windowF),
 
   // Paused all along — always shown (date: null rows aren't range-filtered), zero spend
   { date: null, campaign: "PPD | Search | Montessori Reggio", status: "Пауза", impressions: 0, clicks: 0, cost: 0, conversions: 0 },
@@ -285,6 +298,28 @@ const datedLeads: [string, string, string][] = [
   ["2026-09-13", CAMPAIGN.brand, "Tour in Paddington Park (Pricelist)"],
   ["2026-09-13", CAMPAIGN.genericDubai, "Tour in Paddington Park (Pricelist)"],
   ["2026-09-14", CAMPAIGN.unknown, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-15", CAMPAIGN.locationCore, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-15", CAMPAIGN.locationCore, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-15", CAMPAIGN.unknown, "Tour in Paddington Park"],
+  ["2026-09-16", CAMPAIGN.unknown, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-16", CAMPAIGN.gbp, "Tour in Paddington Park"],
+  ["2026-09-16", CAMPAIGN.unknown, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-16", CAMPAIGN.unknown, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-16", CAMPAIGN.unknown, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-16", CAMPAIGN.genericDubai, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-17", CAMPAIGN.brand, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-17", CAMPAIGN.nearMe, "VIRTUAL TOUR"],
+  ["2026-09-17", CAMPAIGN.genericDubai, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-18", CAMPAIGN.gbp, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-19", CAMPAIGN.gbp, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-19", CAMPAIGN.locationCore, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-19", CAMPAIGN.gbp, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-20", CAMPAIGN.brand, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-20", CAMPAIGN.unknown, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-20", CAMPAIGN.gbp, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-21", CAMPAIGN.ageSpecific, "Tour in Paddington Park (Pricelist)"],
+  ["2026-09-21", CAMPAIGN.brand, "VIRTUAL TOUR"],
+  ["2026-09-21", CAMPAIGN.gbp, "Tour in Paddington Park (Pricelist)"],
 ];
 
 export const leadRows: LeadRow[] = [
@@ -314,4 +349,5 @@ export const periodComparison = [
   { label: "1–31 авг", cost: 14095, clicks: 4107, leads: 80, cpl: 176 },
   { label: "1–7 сент", cost: 4563, clicks: 473, leads: 22, cpl: 207 },
   { label: "8–14 сент", cost: 3279, clicks: 552, leads: 16, cpl: 205 },
+  { label: "14–22 сент", cost: 4023, clicks: 713, leads: 22, cpl: 183 },
 ];
