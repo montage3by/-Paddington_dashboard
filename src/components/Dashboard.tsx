@@ -86,14 +86,16 @@ export function Dashboard() {
     <div className="mx-auto max-w-6xl px-6 py-10">
       <div className="mb-6 flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-center gap-4">
-          <Image
-            src="/logo-pad-white.png"
-            alt="Paddington Park ELC"
-            width={963}
-            height={229}
-            className="h-auto w-full max-w-[520px]"
-            priority
-          />
+          <div className="rounded-lg bg-[#141412] px-4 py-3">
+            <Image
+              src="/logo-pad-v2.png"
+              alt="Paddington Park ELC"
+              width={963}
+              height={229}
+              className="h-auto w-full max-w-[420px]"
+              priority
+            />
+          </div>
           <div>
             <div className="text-xs text-[var(--text-secondary)]">
               Paddington Park ELC · Google Ads · {formatRangeLabel(rangeStart, rangeEnd)}
