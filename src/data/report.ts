@@ -8,12 +8,12 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
  * can be viewed.
  *
  * Campaign rows: Google Ads only reports period totals per campaign (no
- * daily breakdown), pulled from screenshots for four windows: 1–20 Aug
- * (pre-aggregated report), 20–28 Aug, 26–31 Aug, and 1–30 Sep. Each
- * window's per-campaign totals are split evenly across that window's days
- * below — so day-level numbers within a window are an approximation, but
- * any range that aligns with (or spans) whole windows sums back to the
- * real reported totals. The 20–28 and 26–31 Aug windows overlap on
+ * daily breakdown), pulled from screenshots for five windows: 1–20 Aug
+ * (pre-aggregated report), 20–28 Aug, 26–31 Aug, 1–30 Sep, and 1–5 Oct.
+ * Each window's per-campaign totals are split evenly across that window's
+ * days below — so day-level numbers within a window are an approximation,
+ * but any range that aligns with (or spans) whole windows sums back to
+ * the real reported totals. The 20–28 and 26–31 Aug windows overlap on
  * 26–28 Aug, so those days carry cost/impressions from both windows
  * (small double-count, accepted). September used to be stitched together
  * from four overlapping sub-windows (1–7, 8–14, 14–22, 22–27 Sep); that
@@ -23,7 +23,15 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
  * screenshot's campaign table didn't show Summer Camp | Indoor Preschool
  * directly (cut off past row 10) — its numbers were backed out from the
  * gap between the visible rows and the account total (impr/clicks/cost
- * all reconciled exactly against Total: Account).
+ * all reconciled exactly against Total: Account). The 1–5 Oct window has
+ * no screenshot of its own — only a rolling 5 Sep–5 Oct screenshot was
+ * available. Its per-campaign total was derived by subtracting the known
+ * 1–30 Sep total (scaled to its 5–30 Sep portion) from the rolling
+ * window's account total, then distributing that 1–5 Oct total across
+ * campaigns using each campaign's share of the 5 Sep–5 Oct screenshot
+ * (more robust than subtracting per campaign, which produced noisy/
+ * negative results on the smaller campaigns over just 5 days) — treat
+ * 1–5 Oct per-campaign numbers as a rougher estimate than earlier windows.
  *
  * Lead rows: exact per-row dates from CRM exports for 20 Aug onward,
  * filtered to Google Ads (utm_source=google&utm_medium=cpc, attributed
@@ -37,13 +45,13 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
  * approximation (marginal totals are correct, the joint pairing isn't
  * verified per-row).
  *
- * The Youtube Shorts campaign ran 11–31 Aug and had zero September
- * activity (ended before 1 Sep).
+ * The Youtube Shorts campaign ran 11–31 Aug and had zero activity from
+ * September onward (ended before 1 Sep).
  */
 
 export const REPORT_CURRENCY = "AED";
 export const DATA_MIN_DATE = "2026-08-01";
-export const DATA_MAX_DATE = "2026-09-30";
+export const DATA_MAX_DATE = "2026-10-05";
 
 function datesBetween(start: string, end: string): string[] {
   const dates: string[] = [];
@@ -78,6 +86,7 @@ const windowA = datesBetween("2026-08-03", "2026-08-20"); // pre-aggregated 1–
 const windowB = datesBetween("2026-08-20", "2026-08-28"); // screenshot totals for 20–28 Aug
 const windowC = datesBetween("2026-08-26", "2026-08-31"); // screenshot totals for 26–31 Aug
 const windowSep = datesBetween("2026-09-01", "2026-09-30"); // screenshot totals for full Sep (replaces the old 4 sub-windows)
+const windowOct = datesBetween("2026-10-01", "2026-10-05"); // derived totals for 1–5 Oct (see header note)
 
 const CAMPAIGN = {
   genericDubai: "PPD | Search | Generic Dubai",
@@ -143,6 +152,17 @@ export const campaignRows: CampaignRow[] = [
   ...spread(CAMPAIGN.premium, "Активна", { impressions: 1513, clicks: 105, cost: 575.95 }, windowSep),
   ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 100, clicks: 3, cost: 7.14 }, windowSep),
   ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 1446, clicks: 39, cost: 109.07 }, windowSep),
+
+  // 1–5 Oct (derived, not a direct screenshot total — see header note)
+  ...spread(CAMPAIGN.ageSpecific, "Активна", { impressions: 440, clicks: 33, cost: 342.68 }, windowOct),
+  ...spread(CAMPAIGN.brand, "Активна", { impressions: 110, clicks: 29, cost: 16.19 }, windowOct),
+  ...spread(CAMPAIGN.eyfs, "Активна", { impressions: 1029, clicks: 64, cost: 114.82 }, windowOct),
+  ...spread(CAMPAIGN.genericDubai, "Активна", { impressions: 510, clicks: 37, cost: 513.87 }, windowOct),
+  ...spread(CAMPAIGN.locationCore, "Активна", { impressions: 415, clicks: 41, cost: 119.22 }, windowOct),
+  ...spread(CAMPAIGN.nearMe, "Активна", { impressions: 2070, clicks: 115, cost: 207.97 }, windowOct),
+  ...spread(CAMPAIGN.premium, "Активна", { impressions: 236, clicks: 19, cost: 67.46 }, windowOct),
+  ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 16, clicks: 1, cost: 1.01 }, windowOct),
+  ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 232, clicks: 7, cost: 13.34 }, windowOct),
 
   // Paused all along — always shown (date: null rows aren't range-filtered), zero spend
   { date: null, campaign: "PPD | Search | Montessori Reggio", status: "Пауза", impressions: 0, clicks: 0, cost: 0, conversions: 0 },
@@ -328,6 +348,16 @@ const datedLeads: [string, string, string][] = [
   ["2026-09-30", CAMPAIGN.gbp, "Tour in Paddington Park"],
   ["2026-09-30", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
   ["2026-09-30", CAMPAIGN.nearMe, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-01", CAMPAIGN.locationCore, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-01", CAMPAIGN.ageSpecific, "VIRTUAL TOUR"],
+  ["2026-10-01", CAMPAIGN.brand, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-01", CAMPAIGN.eyfs, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-01", CAMPAIGN.gbp, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-02", CAMPAIGN.ageSpecific, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-03", CAMPAIGN.unknown, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-03", CAMPAIGN.gbp, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-03", CAMPAIGN.unknown, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-05", CAMPAIGN.brand, "Tour in Paddington Park (Pricelist)"],
 ];
 
 export const leadRows: LeadRow[] = [
@@ -360,4 +390,5 @@ export const periodComparison = [
   { label: "14–22 сент", cost: 4023, clicks: 713, leads: 22, cpl: 183 },
   { label: "22–27 сент", cost: 2403, clicks: 384, leads: 15, cpl: 160 },
   { label: "1–30 сент", cost: 14500, clicks: 2229, leads: 85, cpl: 171 },
+  { label: "1–5 окт", cost: 1397, clicks: 346, leads: 10, cpl: 140 },
 ];
