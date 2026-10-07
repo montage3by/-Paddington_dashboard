@@ -68,6 +68,15 @@ export function Dashboard() {
     () => daily.filter((d) => d.leads > 0).map((d) => ({ date: d.date, leads: d.leads })),
     [daily]
   );
+  const leadsList = useMemo(
+    () =>
+      [...dataset.leads].sort((a, b) => {
+        const da = a.date ?? "";
+        const db = b.date ?? "";
+        return db.localeCompare(da);
+      }),
+    [dataset]
+  );
 
   const youtube = campaigns.find((c) => c.campaign === "Youtube Shorts") ?? null;
   const searchOnly = useMemo(() => {
@@ -403,6 +412,43 @@ export function Dashboard() {
               </table>
             </div>
           </div>
+        )}
+      </div>
+
+      <div className="mt-6 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
+        <div className="mb-3 flex items-baseline justify-between gap-3">
+          <div className="text-sm font-medium text-[var(--text-primary)]">
+            Лиды — список по датам
+          </div>
+          <div className="text-xs text-[var(--text-secondary)]">
+            {formatNumber(leadsList.length)} за {formatRangeLabel(rangeStart, rangeEnd)}
+          </div>
+        </div>
+        {leadsList.length > 0 ? (
+          <div className="max-h-[480px] overflow-y-auto overflow-x-auto rounded-lg border border-[var(--border)]">
+            <table className="w-full min-w-[480px] text-sm">
+              <thead className="sticky top-0 bg-[var(--surface)]">
+                <tr className="border-b border-[var(--border)] text-left text-[var(--text-secondary)]">
+                  <th className="px-4 py-2.5 font-medium">Дата</th>
+                  <th className="px-4 py-2.5 font-medium">Источник</th>
+                  <th className="px-4 py-2.5 font-medium">Форма</th>
+                </tr>
+              </thead>
+              <tbody className="[font-variant-numeric:tabular-nums]">
+                {leadsList.map((lead, i) => (
+                  <tr key={i} className="border-b border-[var(--border)] last:border-0">
+                    <td className="whitespace-nowrap px-4 py-2 text-[var(--text-primary)]">
+                      {lead.date ?? "—"}
+                    </td>
+                    <td className="px-4 py-2 text-[var(--text-primary)]">{lead.campaign}</td>
+                    <td className="px-4 py-2 text-[var(--text-secondary)]">{lead.form}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p className="text-sm text-[var(--text-secondary)]">Нет лидов за выбранный период.</p>
         )}
       </div>
     </div>
