@@ -8,30 +8,36 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
  * can be viewed.
  *
  * Campaign rows: Google Ads only reports period totals per campaign (no
- * daily breakdown), pulled from screenshots for five windows: 1–20 Aug
- * (pre-aggregated report), 20–28 Aug, 26–31 Aug, 1–30 Sep, and 1–5 Oct.
- * Each window's per-campaign totals are split evenly across that window's
- * days below — so day-level numbers within a window are an approximation,
- * but any range that aligns with (or spans) whole windows sums back to
- * the real reported totals. The 20–28 and 26–31 Aug windows overlap on
- * 26–28 Aug, so those days carry cost/impressions from both windows
- * (small double-count, accepted). September used to be stitched together
- * from four overlapping sub-windows (1–7, 8–14, 14–22, 22–27 Sep); that
- * approach was replaced on 1 Oct by a single 1–30 Sep screenshot (full
- * calendar month, no overlap) once it became available, since it is the
- * exact, authoritative per-campaign total for the whole month. The
- * screenshot's campaign table didn't show Summer Camp | Indoor Preschool
- * directly (cut off past row 10) — its numbers were backed out from the
- * gap between the visible rows and the account total (impr/clicks/cost
- * all reconciled exactly against Total: Account). The 1–5 Oct window has
- * no screenshot of its own — only a rolling 5 Sep–5 Oct screenshot was
- * available. Its per-campaign total was derived by subtracting the known
- * 1–30 Sep total (scaled to its 5–30 Sep portion) from the rolling
- * window's account total, then distributing that 1–5 Oct total across
- * campaigns using each campaign's share of the 5 Sep–5 Oct screenshot
- * (more robust than subtracting per campaign, which produced noisy/
- * negative results on the smaller campaigns over just 5 days) — treat
- * 1–5 Oct per-campaign numbers as a rougher estimate than earlier windows.
+ * daily breakdown), pulled from screenshots for six windows: 1–20 Aug
+ * (pre-aggregated report), 20–28 Aug, 26–31 Aug, 1–30 Sep, 1–5 Oct, and
+ * 6–11 Oct. Each window's per-campaign totals are split evenly across
+ * that window's days below — so day-level numbers within a window are an
+ * approximation, but any range that aligns with (or spans) whole windows
+ * sums back to the real reported totals. The 20–28 and 26–31 Aug windows
+ * overlap on 26–28 Aug, so those days carry cost/impressions from both
+ * windows (small double-count, accepted). September used to be stitched
+ * together from four overlapping sub-windows (1–7, 8–14, 14–22, 22–27
+ * Sep); that approach was replaced on 1 Oct by a single 1–30 Sep
+ * screenshot (full calendar month, no overlap) once it became available,
+ * since it is the exact, authoritative per-campaign total for the whole
+ * month. Campaign tables cut off past row 10 (Summer Camp | Indoor
+ * Preschool isn't shown) in every screenshot since — its numbers are
+ * consistently backed out from the gap between the visible rows and the
+ * account total (impr/clicks/cost all reconciled exactly against Total:
+ * Account). The 1–5 Oct window has no screenshot of its own — only a
+ * rolling 5 Sep–5 Oct screenshot was available. Its per-campaign total
+ * was derived by subtracting the known 1–30 Sep total (scaled to its
+ * 5–30 Sep portion) from the rolling window's account total, then
+ * distributing that 1–5 Oct total across campaigns using each campaign's
+ * share of the 5 Sep–5 Oct screenshot (more robust than subtracting per
+ * campaign, which produced noisy/negative results on the smaller
+ * campaigns over just 5 days). The 6–11 Oct window similarly has no
+ * screenshot of its own — only a rolling 5–11 Oct screenshot — so its
+ * per-campaign total was derived by subtracting a one-day (5 Oct)
+ * estimate, taken from the 1–5 Oct window's daily average, from the
+ * 5–11 Oct screenshot's per-campaign totals. Treat both Oct windows as
+ * rougher estimates than the Aug/Sep windows, which came from direct
+ * non-overlapping screenshots.
  *
  * Lead rows: exact per-row dates from CRM exports for 20 Aug onward,
  * filtered to Google Ads (utm_source=google&utm_medium=cpc, attributed
@@ -51,7 +57,7 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
 
 export const REPORT_CURRENCY = "AED";
 export const DATA_MIN_DATE = "2026-08-01";
-export const DATA_MAX_DATE = "2026-10-05";
+export const DATA_MAX_DATE = "2026-10-11";
 
 function datesBetween(start: string, end: string): string[] {
   const dates: string[] = [];
@@ -87,6 +93,7 @@ const windowB = datesBetween("2026-08-20", "2026-08-28"); // screenshot totals f
 const windowC = datesBetween("2026-08-26", "2026-08-31"); // screenshot totals for 26–31 Aug
 const windowSep = datesBetween("2026-09-01", "2026-09-30"); // screenshot totals for full Sep (replaces the old 4 sub-windows)
 const windowOct = datesBetween("2026-10-01", "2026-10-05"); // derived totals for 1–5 Oct (see header note)
+const windowOct2 = datesBetween("2026-10-06", "2026-10-11"); // derived totals for 6–11 Oct (see header note)
 
 const CAMPAIGN = {
   genericDubai: "PPD | Search | Generic Dubai",
@@ -163,6 +170,17 @@ export const campaignRows: CampaignRow[] = [
   ...spread(CAMPAIGN.premium, "Активна", { impressions: 236, clicks: 19, cost: 67.46 }, windowOct),
   ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 16, clicks: 1, cost: 1.01 }, windowOct),
   ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 232, clicks: 7, cost: 13.34 }, windowOct),
+
+  // 6–11 Oct (derived, not a direct screenshot total — see header note)
+  ...spread(CAMPAIGN.ageSpecific, "Активна", { impressions: 189, clicks: 22.4, cost: 653.16 }, windowOct2),
+  ...spread(CAMPAIGN.brand, "Активна", { impressions: 142, clicks: 40.2, cost: 35.72 }, windowOct2),
+  ...spread(CAMPAIGN.eyfs, "Активна", { impressions: 1113, clicks: 80.2, cost: 242.42 }, windowOct2),
+  ...spread(CAMPAIGN.genericDubai, "Активна", { impressions: 719, clicks: 43.6, cost: 960.27 }, windowOct2),
+  ...spread(CAMPAIGN.locationCore, "Активна", { impressions: 515, clicks: 44.8, cost: 218.56 }, windowOct2),
+  ...spread(CAMPAIGN.nearMe, "Активна", { impressions: 2382, clicks: 106, cost: 304.53 }, windowOct2),
+  ...spread(CAMPAIGN.premium, "Активна", { impressions: 372, clicks: 29.2, cost: 176.19 }, windowOct2),
+  ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 82, clicks: 7.8, cost: 21.80 }, windowOct2),
+  ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 363, clicks: 12.6, cost: 35.73 }, windowOct2),
 
   // Paused all along — always shown (date: null rows aren't range-filtered), zero spend
   { date: null, campaign: "PPD | Search | Montessori Reggio", status: "Пауза", impressions: 0, clicks: 0, cost: 0, conversions: 0 },
@@ -358,6 +376,13 @@ const datedLeads: [string, string, string][] = [
   ["2026-10-03", CAMPAIGN.gbp, "Tour in Paddington Park (Pricelist)"],
   ["2026-10-03", CAMPAIGN.unknown, "Tour in Paddington Park (Pricelist)"],
   ["2026-10-05", CAMPAIGN.brand, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-06", CAMPAIGN.gbp, "Tour in Paddington Park (Pricelist)"],
+  ["2026-10-06", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
+  ["2026-10-07", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
+  ["2026-10-08", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
+  ["2026-10-08", CAMPAIGN.ageSpecific, "VIRTUAL TOUR"],
+  ["2026-10-09", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
+  ["2026-10-09", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
 ];
 
 export const leadRows: LeadRow[] = [
@@ -391,4 +416,5 @@ export const periodComparison = [
   { label: "22–27 сент", cost: 2403, clicks: 384, leads: 15, cpl: 160 },
   { label: "1–30 сент", cost: 14500, clicks: 2229, leads: 85, cpl: 171 },
   { label: "1–5 окт", cost: 1397, clicks: 346, leads: 10, cpl: 140 },
+  { label: "6–11 окт", cost: 2648, clicks: 387, leads: 7, cpl: 378 },
 ];
