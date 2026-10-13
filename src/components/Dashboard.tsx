@@ -122,14 +122,24 @@ export function Dashboard() {
             </div>
           </div>
         </div>
-        <a
-          href="https://claude.ai/artifact/Bv8bdAA3UD4qEGHMKNEV9K"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-md border border-[var(--series-1)] bg-[var(--surface)] px-3.5 py-2 text-xs font-medium text-[var(--series-1)]"
-        >
-          Маркетинговый анализ →
-        </a>
+        <div className="flex flex-wrap gap-2">
+          <a
+            href="https://claude.ai/artifact/Bv8bdAA3UD4qEGHMKNEV9K"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md border border-[var(--series-1)] bg-[var(--surface)] px-3.5 py-2 text-xs font-medium text-[var(--series-1)]"
+          >
+            Маркетинговый анализ →
+          </a>
+          <a
+            href="https://claude.ai/artifact/2xF6uFhWQceaNTxGetJpPk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md border border-[var(--series-1)] bg-[var(--surface)] px-3.5 py-2 text-xs font-medium text-[var(--series-1)]"
+          >
+            SEO-стратегия →
+          </a>
+        </div>
       </div>
 
       <div className="mb-6 flex flex-wrap items-end gap-3 rounded-lg border border-[var(--border)] bg-[var(--gridline)] px-4 py-3">
