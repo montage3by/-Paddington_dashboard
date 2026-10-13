@@ -139,6 +139,14 @@ export function Dashboard() {
           >
             SEO-стратегия →
           </a>
+          <a
+            href="https://claude.ai/artifact/GHG4AhEt7vFQFmeDemVhTp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md border border-[var(--series-1)] bg-[var(--surface)] px-3.5 py-2 text-xs font-medium text-[var(--series-1)]"
+          >
+            YouTube-стратегия →
+          </a>
         </div>
       </div>
 
