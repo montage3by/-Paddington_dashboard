@@ -35,8 +35,11 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
  * screenshot of its own — only a rolling 5–11 Oct screenshot — so its
  * per-campaign total was derived by subtracting a one-day (5 Oct)
  * estimate, taken from the 1–5 Oct window's daily average, from the
- * 5–11 Oct screenshot's per-campaign totals. Treat both Oct windows as
- * rougher estimates than the Aug/Sep windows, which came from direct
+ * 5–11 Oct screenshot's per-campaign totals. The 12–18 Oct window used
+ * the same subtraction approach against a rolling 11–18 Oct screenshot,
+ * subtracting a one-day (11 Oct) estimate taken from the 6–11 Oct
+ * window's daily average. Treat all three Oct windows as rougher
+ * estimates than the Aug/Sep windows, which came from direct
  * non-overlapping screenshots.
  *
  * Lead rows: exact per-row dates from CRM exports for 20 Aug onward,
@@ -57,7 +60,7 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
 
 export const REPORT_CURRENCY = "AED";
 export const DATA_MIN_DATE = "2026-08-01";
-export const DATA_MAX_DATE = "2026-10-11";
+export const DATA_MAX_DATE = "2026-10-18";
 
 function datesBetween(start: string, end: string): string[] {
   const dates: string[] = [];
@@ -94,6 +97,7 @@ const windowC = datesBetween("2026-08-26", "2026-08-31"); // screenshot totals f
 const windowSep = datesBetween("2026-09-01", "2026-09-30"); // screenshot totals for full Sep (replaces the old 4 sub-windows)
 const windowOct = datesBetween("2026-10-01", "2026-10-05"); // derived totals for 1–5 Oct (see header note)
 const windowOct2 = datesBetween("2026-10-06", "2026-10-11"); // derived totals for 6–11 Oct (see header note)
+const windowOct3 = datesBetween("2026-10-12", "2026-10-18"); // derived totals for 12–18 Oct (see header note)
 
 const CAMPAIGN = {
   genericDubai: "PPD | Search | Generic Dubai",
@@ -181,6 +185,17 @@ export const campaignRows: CampaignRow[] = [
   ...spread(CAMPAIGN.premium, "Активна", { impressions: 372, clicks: 29.2, cost: 176.19 }, windowOct2),
   ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 82, clicks: 7.8, cost: 21.80 }, windowOct2),
   ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 363, clicks: 12.6, cost: 35.73 }, windowOct2),
+
+  // 12–18 Oct (derived, not a direct screenshot total — see header note)
+  ...spread(CAMPAIGN.ageSpecific, "Активна", { impressions: 609, clicks: 48.3, cost: 773.00 }, windowOct3),
+  ...spread(CAMPAIGN.brand, "Активна", { impressions: 97, clicks: 24.3, cost: 22.22 }, windowOct3),
+  ...spread(CAMPAIGN.eyfs, "Активна", { impressions: 1133, clicks: 62.6, cost: 170.08 }, windowOct3),
+  ...spread(CAMPAIGN.genericDubai, "Активна", { impressions: 488, clicks: 42.7, cost: 1154.79 }, windowOct3),
+  ...spread(CAMPAIGN.locationCore, "Активна", { impressions: 481, clicks: 34.5, cost: 149.60 }, windowOct3),
+  ...spread(CAMPAIGN.nearMe, "Активна", { impressions: 2455, clicks: 117.3, cost: 332.80 }, windowOct3),
+  ...spread(CAMPAIGN.premium, "Активна", { impressions: 263, clicks: 20.1, cost: 113.16 }, windowOct3),
+  ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 38, clicks: 0.7, cost: 1.51 }, windowOct3),
+  ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 367, clicks: 5.9, cost: 17.34 }, windowOct3),
 
   // Paused all along — always shown (date: null rows aren't range-filtered), zero spend
   { date: null, campaign: "PPD | Search | Montessori Reggio", status: "Пауза", impressions: 0, clicks: 0, cost: 0, conversions: 0 },
@@ -383,6 +398,11 @@ const datedLeads: [string, string, string][] = [
   ["2026-10-08", CAMPAIGN.ageSpecific, "VIRTUAL TOUR"],
   ["2026-10-09", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
   ["2026-10-09", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
+  ["2026-10-14", CAMPAIGN.unknown, "VIRTUAL TOUR"],
+  ["2026-10-14", CAMPAIGN.gbp, "VIRTUAL TOUR"],
+  ["2026-10-14", CAMPAIGN.unknown, "TDS LP- Request Camp Program"],
+  ["2026-10-15", CAMPAIGN.unknown, "VIRTUAL TOUR"],
+  ["2026-10-18", CAMPAIGN.unknown, "VIRTUAL TOUR"],
 ];
 
 export const leadRows: LeadRow[] = [
@@ -417,4 +437,5 @@ export const periodComparison = [
   { label: "1–30 сент", cost: 14500, clicks: 2229, leads: 85, cpl: 171 },
   { label: "1–5 окт", cost: 1397, clicks: 346, leads: 10, cpl: 140 },
   { label: "6–11 окт", cost: 2648, clicks: 387, leads: 7, cpl: 378 },
+  { label: "12–18 окт", cost: 2735, clicks: 357, leads: 5, cpl: 547 },
 ];
