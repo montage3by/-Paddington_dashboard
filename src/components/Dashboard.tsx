@@ -9,6 +9,7 @@ import {
   DATA_MIN_DATE,
   REPORT_CURRENCY,
   campaignRows,
+  crmLeadsSummary,
   leadRows,
   periodComparison,
   youtubeLifetimeStats,
@@ -22,7 +23,7 @@ import { CampaignsTable } from "./CampaignsTable";
 import { LeadsFormTable } from "./LeadsFormTable";
 import { LeadsByDayChart } from "./LeadsByDayChart";
 
-type Tab = "overview" | "campaigns" | "leads" | "youtube";
+type Tab = "overview" | "campaigns" | "leads" | "youtube" | "crm";
 
 const currentMonthStart = DATA_MAX_DATE.slice(0, 7) + "-01";
 const DEFAULT_START = currentMonthStart >= DATA_MIN_DATE ? currentMonthStart : DATA_MIN_DATE;
@@ -222,6 +223,7 @@ export function Dashboard() {
             ["campaigns", "Кампании"],
             ["leads", "Лиды"],
             ["youtube", "YouTube Shorts"],
+            ["crm", "CRM (Zoho)"],
           ] as [Tab, string][]
         ).map(([id, label]) => (
           <button
@@ -428,6 +430,108 @@ export function Dashboard() {
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+        )}
+
+        {tab === "crm" && (
+          <div className="flex flex-col gap-6">
+            <p className="text-xs text-[var(--text-secondary)]">
+              Данные из выгрузки Zoho CRM "Предварительные контакты" — другой источник, чем
+              Tilda-формы выше (без UTM, с ручными тегами менеджеров). Отфильтровано по Branch =
+              "Al Barsha" (Paddington Park Arjan). Тег "Google Ads" — нижняя граница: у
+              большинства лидов с источником "PaidMarketing" канал не уточнён отдельным тегом.
+            </p>
+
+            {crmLeadsSummary.months.map((m) => (
+              <div key={m.label}>
+                <div className="mb-3 text-sm font-medium text-[var(--text-primary)]">
+                  {m.label} · всего {formatNumber(m.totalAlBarsha)} лидов (Al Barsha)
+                </div>
+                <div className="mb-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  <StatTile label="PaidMarketing" value={formatNumber(m.paidMarketing)} />
+                  <StatTile label="— из них Google Ads" value={formatNumber(m.googleAdsTag)} tone="good" />
+                  <StatTile label="— META" value={formatNumber(m.metaTag)} />
+                  <StatTile label="— без канала" value={formatNumber(m.unlabeledPaid)} />
+                  <StatTile label="Без идентификатора" value={formatNumber(m.noIdentifier)} />
+                </div>
+                <div className="overflow-x-auto rounded-lg border border-[var(--border)]">
+                  <table className="w-full min-w-[420px] text-sm">
+                    <thead>
+                      <tr className="border-b border-[var(--border)] text-left text-[var(--text-secondary)]">
+                        <th className="px-4 py-2.5 font-medium">Статус (Google Ads лиды)</th>
+                        <th className="px-4 py-2.5 text-right font-medium">Кол-во</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {m.googleAdsStatuses.map((s) => (
+                        <tr key={s.status} className="border-b border-[var(--border)] last:border-0">
+                          <td className="px-4 py-2 text-[var(--text-primary)]">{s.status}</td>
+                          <td className="px-4 py-2 text-right text-[var(--text-primary)]">
+                            {formatNumber(s.count)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            ))}
+
+            <div>
+              <div className="mb-3 text-sm font-medium text-[var(--text-primary)]">
+                Разбивка по источнику (все лиды, Al Barsha)
+              </div>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {Object.entries(crmLeadsSummary.sourceBreakdown).map(([label, rows]) => (
+                  <div key={label} className="overflow-x-auto rounded-lg border border-[var(--border)]">
+                    <table className="w-full min-w-[320px] text-sm">
+                      <thead>
+                        <tr className="border-b border-[var(--border)] text-left text-[var(--text-secondary)]">
+                          <th className="px-4 py-2.5 font-medium">{label}</th>
+                          <th className="px-4 py-2.5 text-right font-medium">Кол-во</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {rows.map((r) => (
+                          <tr key={r.source} className="border-b border-[var(--border)] last:border-0">
+                            <td className="px-4 py-2 text-[var(--text-primary)]">{r.source}</td>
+                            <td className="px-4 py-2 text-right text-[var(--text-primary)]">
+                              {formatNumber(r.count)}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <div className="mb-3 text-sm font-medium text-[var(--text-primary)]">
+                Что означают статусы
+              </div>
+              <div className="overflow-x-auto rounded-lg border border-[var(--border)]">
+                <table className="w-full min-w-[480px] text-sm">
+                  <thead>
+                    <tr className="border-b border-[var(--border)] text-left text-[var(--text-secondary)]">
+                      <th className="px-4 py-2.5 font-medium">Статус</th>
+                      <th className="px-4 py-2.5 font-medium">Значение</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {crmLeadsSummary.statusGlossary.map((s) => (
+                      <tr key={s.status} className="border-b border-[var(--border)] last:border-0">
+                        <td className="whitespace-nowrap px-4 py-2 text-[var(--text-primary)]">
+                          {s.status}
+                        </td>
+                        <td className="px-4 py-2 text-[var(--text-secondary)]">{s.meaning}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}

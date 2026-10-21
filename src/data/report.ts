@@ -439,3 +439,95 @@ export const periodComparison = [
   { label: "6–11 окт", cost: 2648, clicks: 387, leads: 7, cpl: 378 },
   { label: "12–18 окт", cost: 2735, clicks: 357, leads: 5, cpl: 547 },
 ];
+
+// Отдельный источник данных: выгрузка Zoho CRM "Предварительные контакты"
+// (не Tilda/UTM!). Поле "источник" — ручной тег менеджера, не связано
+// с UTM-метками выше. Отфильтровано по Branch = "Al Barsha" (= Paddington
+// Park Arjan, в отличие от "JLT" — сестринский сад). Тег "Google Ads" в
+// поле "Тег" — минимальная граница, т.к. у большинства лидов с источником
+// "PaidMarketing" уточняющего тега канала вообще нет (см. unlabeledPaid).
+export const crmLeadsSummary = {
+  months: [
+    {
+      label: "Сентябрь 2026",
+      totalAlBarsha: 368,
+      paidMarketing: 231,
+      googleAdsTag: 31,
+      metaTag: 12,
+      russianPaidTag: 4,
+      unlabeledPaid: 184,
+      noIdentifier: 1,
+      googleAdsStatuses: [
+        { status: "Follow-up sent", count: 15 },
+        { status: "Attempted to call", count: 5 },
+        { status: "Contacted", count: 4 },
+        { status: "Attended", count: 3 },
+        { status: "Not interested/Not Qualified", count: 3 },
+        { status: "Tour scheduled", count: 1 },
+      ],
+    },
+    {
+      label: "Октябрь 2026",
+      totalAlBarsha: 350,
+      paidMarketing: 233,
+      googleAdsTag: 11,
+      metaTag: 0,
+      russianPaidTag: 1,
+      unlabeledPaid: 221,
+      noIdentifier: 16,
+      googleAdsStatuses: [
+        { status: "Contacted", count: 8 },
+        { status: "Attempted to call", count: 1 },
+        { status: "Moved to Sales", count: 1 },
+        { status: "Tour done", count: 1 },
+      ],
+    },
+  ],
+  sourceBreakdown: {
+    "Сентябрь 2026": [
+      { source: "PaidMarketing", count: 231 },
+      { source: "WhatsApp paddington park", count: 41 },
+      { source: "SEO recommendation (AI, google business, Edu arabaia)", count: 29 },
+      { source: "Social media", count: 24 },
+      { source: "Event offline", count: 12 },
+      { source: "Website Paddington Park", count: 10 },
+      { source: "friends/collegues recommendation", count: 7 },
+      { source: "Walk-ins", count: 5 },
+      { source: "Landline call", count: 3 },
+      { source: "partner Algorithm/old lead base", count: 2 },
+      { source: "live close by", count: 2 },
+      { source: "Driving by", count: 1 },
+      { source: "(пусто)", count: 1 },
+    ],
+    "Октябрь 2026": [
+      { source: "PaidMarketing", count: 233 },
+      { source: "WhatsApp paddington park", count: 78 },
+      { source: "(пусто)", count: 16 },
+      { source: "Landline call", count: 4 },
+      { source: "Social media", count: 3 },
+      { source: "SEO recommendation (AI, google business, Edu arabaia)", count: 3 },
+      { source: "live close by", count: 2 },
+      { source: "partner Algorithm/old lead base", count: 2 },
+      { source: "WHATSAPP - Paddington JLT", count: 2 },
+      { source: "Friend recommendation", count: 1 },
+      { source: "we have always known Paddington", count: 1 },
+      { source: "friends/collegues recommendation", count: 1 },
+      { source: "Whatsapp 971521290607", count: 1 },
+      { source: "Walk-ins", count: 1 },
+      { source: "Website Paddington Park", count: 1 },
+      { source: "SEO recommendation (organic search)", count: 1 },
+    ],
+  },
+  statusGlossary: [
+    { status: "Lead Captured", meaning: "Лид зафиксирован, контакт ещё не начат" },
+    { status: "Attempted to call", meaning: "Пытались позвонить, не дозвонились" },
+    { status: "Contacted", meaning: "Связались (дозвонились / ответили в WhatsApp)" },
+    { status: "Follow-up sent", meaning: "Отправлено напоминание, ждём реакции" },
+    { status: "Tour scheduled", meaning: "Назначена экскурсия по саду" },
+    { status: "Tour done / Attended", meaning: "Экскурсия или ивент состоялись — лид пришёл" },
+    { status: "Moved to Sales", meaning: "Передан в отдел продаж после удачного тура" },
+    { status: "Enrolled", meaning: "Зачислен — ребёнок стал учеником" },
+    { status: "Not interested/Not Qualified", meaning: "Отвалился — не интересно или не подходит" },
+    { status: "No show up for the event", meaning: "Записался, но не пришёл" },
+  ],
+};
