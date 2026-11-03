@@ -60,7 +60,7 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
 
 export const REPORT_CURRENCY = "AED";
 export const DATA_MIN_DATE = "2026-08-01";
-export const DATA_MAX_DATE = "2026-10-25";
+export const DATA_MAX_DATE = "2026-11-02";
 
 function datesBetween(start: string, end: string): string[] {
   const dates: string[] = [];
@@ -99,6 +99,7 @@ const windowOct = datesBetween("2026-10-01", "2026-10-05"); // derived totals fo
 const windowOct2 = datesBetween("2026-10-06", "2026-10-11"); // derived totals for 6–11 Oct (see header note)
 const windowOct3 = datesBetween("2026-10-12", "2026-10-18"); // derived totals for 12–18 Oct (see header note)
 const windowOct4 = datesBetween("2026-10-19", "2026-10-25"); // derived totals for 19–25 Oct (see header note)
+const windowOct5 = datesBetween("2026-10-26", "2026-11-02"); // derived totals for 26 Oct–2 Nov (see header note)
 
 const CAMPAIGN = {
   genericDubai: "PPD | Search | Generic Dubai",
@@ -207,6 +208,16 @@ export const campaignRows: CampaignRow[] = [
   ...spread(CAMPAIGN.premium, "Активна", { impressions: 384.43, clicks: 17.13, cost: 96.24 }, windowOct4),
   ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 17.57, clicks: 0, cost: 0 }, windowOct4),
   ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 236.57, clicks: 5.16, cost: 15.10 }, windowOct4),
+
+  ...spread(CAMPAIGN.ageSpecific, "Активна", { impressions: 322.71, clicks: 20.99, cost: 342.97 }, windowOct5),
+  ...spread(CAMPAIGN.brand, "Активна", { impressions: 144.98, clicks: 38.07, cost: 31.31 }, windowOct5),
+  ...spread(CAMPAIGN.eyfs, "Активна", { impressions: 1304.69, clicks: 66.28, cost: 191.29 }, windowOct5),
+  ...spread(CAMPAIGN.genericDubai, "Активна", { impressions: 890.10, clicks: 52.73, cost: 860.92 }, windowOct5),
+  ...spread(CAMPAIGN.locationCore, "Активна", { impressions: 567.24, clicks: 57.70, cost: 268.40 }, windowOct5),
+  ...spread(CAMPAIGN.nearMe, "Активна", { impressions: 2776.53, clicks: 134.39, cost: 370.97 }, windowOct5),
+  ...spread(CAMPAIGN.premium, "Активна", { impressions: 302.08, clicks: 10.55, cost: 49.87 }, windowOct5),
+  ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 6.49, clicks: 0, cost: 0 }, windowOct5),
+  ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 125.20, clicks: 3.26, cost: 8.69 }, windowOct5),
 
   // Paused all along — always shown (date: null rows aren't range-filtered), zero spend
   { date: null, campaign: "PPD | Search | Montessori Reggio", status: "Пауза", impressions: 0, clicks: 0, cost: 0, conversions: 0 },
@@ -422,6 +433,12 @@ const datedLeads: [string, string, string][] = [
   ["2026-10-23", CAMPAIGN.eyfs, "VIRTUAL TOUR"],
   ["2026-10-24", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
   ["2026-10-25", CAMPAIGN.unknown, "VIRTUAL TOUR"],
+  ["2026-10-26", CAMPAIGN.brand, "VIRTUAL TOUR"],
+  ["2026-10-27", CAMPAIGN.brand, "VIRTUAL TOUR"],
+  ["2026-10-28", CAMPAIGN.gbp, "VIRTUAL TOUR"],
+  ["2026-10-29", CAMPAIGN.unknown, "VIRTUAL TOUR"],
+  ["2026-10-30", CAMPAIGN.unknown, "VIRTUAL TOUR"],
+  ["2026-11-02", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
 ];
 
 export const leadRows: LeadRow[] = [
@@ -458,6 +475,7 @@ export const periodComparison = [
   { label: "6–11 окт", cost: 2648, clicks: 387, leads: 7, cpl: 378 },
   { label: "12–18 окт", cost: 2735, clicks: 357, leads: 5, cpl: 547 },
   { label: "19–25 окт", cost: 2389, clicks: 343, leads: 8, cpl: 299 },
+  { label: "26 окт–2 ноя", cost: 2124, clicks: 384, leads: 6, cpl: 354 },
 ];
 
 // Отдельный источник данных: выгрузка Zoho CRM "Предварительные контакты"
