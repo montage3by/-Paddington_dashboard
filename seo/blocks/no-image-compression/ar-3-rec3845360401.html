@@ -1,0 +1,394 @@
+<!-- nominify begin --><style>:where(h2.js-block-header-title){margin:0;font-size:inherit;font-weight:inherit}:where(h2.t1115__title){font-size:2em;margin-block:0.67em;font-weight:bold}</style> <!-- Paddington Park, БЛОК 2 из 2. Ставится сразу ПОД формой.
+     Несет оформление и логику всего, что ниже: «почему», возрасты, допзанятия. --> <style>
+/* ---- возрасты: направления развития лентой со свайпом ---- */
+.pp-feat-rail{display:flex !important;flex-wrap:nowrap !important;overflow-x:auto;
+scroll-snap-type:x mandatory;scroll-behavior:smooth;gap:22px;
+margin:18px 0 0 !important;padding:0 0 8px !important;list-style:none;
+-ms-overflow-style:none;scrollbar-width:none}
+.pp-feat-rail::-webkit-scrollbar{display:none}
+.pp-feat-rail > .t1115__feature{flex:0 0 auto !important;width:252px !important;
+max-width:252px !important;margin:0 !important;padding:0 !important;
+scroll-snap-align:start;display:block !important}
+.pp-feat-rail .t1115__feature-icon-wrap{display:none !important}
+.pp-feat-rail .t1115__feature-text-wrap{padding:0 !important;margin:0 !important}
+.pp-feat-rail .t1115__feature-title{padding:12px 0 8px !important;
+border-top:1px solid rgba(196,163,98,.45)}
+/* стрелки внутри колонки возраста делаем мельче и без внешних отступов */
+.t1115__content .pp-rail-nav{max-width:none;margin:0 0 6px;padding:0}
+.t1115__content .pp-nav{width:34px;height:34px}
+.t1115__content .pp-nav svg{width:20px;height:20px}
+/* текст в карточке подрезаем до четырех строк, целиком открывается по клику */
+.pp-feat-rail .t1115__feature-descr{display:-webkit-box !important;-webkit-line-clamp:4;
+-webkit-box-orient:vertical;overflow:hidden;margin:0 !important}
+.pp-feat-rail .pp-more{margin-top:10px}
+#rec1381696741,#rec1381696761,#rec1381696781,#rec1381696801,#rec1381696821{
+padding-top:20px !important;padding-bottom:70px !important}
+#rec1381696741 .t1115__image,#rec1381696761 .t1115__image,#rec1381696781 .t1115__image,
+#rec1381696801 .t1115__image,#rec1381696821 .t1115__image{
+width:auto !important;height:auto !important;max-width:100%;max-height:430px;
+object-fit:contain;display:block;margin-left:auto}
+#rec1381696721{padding-bottom:30px !important}
+
+/* ---- шапка EYFS: подпись налезала на заголовок ---- */
+/* Зеро-блок, координаты фиксированные. Ниже 480px заголовок перестает
+   помещаться в строку и уходит во вторую, а подпись стоит на своей высоте.
+   Опускаем подпись и добавляем высоты полотну. Есть и на боевом сайте. */
+@media screen and (max-width:479px){
+#rec1399067921 .t396__artboard,#rec1399067921 .t396__filter,
+#rec1399067921 .t396__carrier{height:205px !important}
+#rec1399067921 .tn-elem[data-elem-id="1479129336226"]{top:126px !important}
+}
+
+/* на телефоне родной выпадающий список меняем на ленту вкладок со скроллом */
+@media screen and (max-width:960px){
+#rec1381696721 .t395__wrapper_mobile{display:none !important}
+#rec1381696721 .t395__wrapper{display:flex !important;flex-wrap:nowrap !important;
+overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;text-align:left;
+margin:0;padding:0 20px 4px;-ms-overflow-style:none;scrollbar-width:none}
+#rec1381696721 .t395__wrapper::-webkit-scrollbar{display:none}
+#rec1381696721 .t395__tab{flex:0 0 auto !important;display:block !important;float:none !important;
+width:auto !important;max-width:none !important;min-width:170px;scroll-snap-align:center}
+#rec1381696721 .t395__title{white-space:normal;padding-left:16px;padding-right:16px}
+}
+
+/* ---- почему Paddington Park: лента со свайпом ---- */
+#rec1381696641 .t1108__bgimg{display:none !important}
+/* Девять карточек в три ряда занимали 2500px. Складываем в одну ленту. */
+#rec1381696641 .pp-why-grid{display:flex !important;flex-wrap:nowrap !important;
+overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;gap:26px;
+padding-bottom:8px;-ms-overflow-style:none;scrollbar-width:none}
+#rec1381696641 .pp-why-grid::-webkit-scrollbar{display:none}
+#rec1381696641 .pp-why-grid > .t-col{flex:0 0 auto !important;float:none !important;
+width:300px !important;max-width:300px !important;margin:0 !important;padding:0 !important;
+scroll-snap-align:start}
+/* Кремовая рамка снята: горизонтальные кадры дорисованы до 4:5 и заполняют
+   карточку сами. Кадр по-прежнему вписывается целиком, не режется: если
+   придет другой формат, он встанет по центру, а не обрежется. */
+#rec1381696641 .t1108__imgwrapper{box-sizing:border-box;height:375px !important;
+max-width:none;margin-bottom:20px;padding:0;background:none;
+display:flex;align-items:center;justify-content:center}
+#rec1381696641 .pp-photo{display:block;max-width:100%;max-height:100%;width:auto;height:auto;
+border-radius:0}
+@media screen and (max-width:640px){#rec1381696641 .pp-why-grid{gap:16px}
+#rec1381696641 .pp-why-grid > .t-col{width:270px !important;max-width:270px !important}
+#rec1381696641 .t1108__imgwrapper{height:338px !important}}
+#rec1381696641 .t1108__line,#rec1381696641 .t1108__line-mobile,
+#rec1381696641 .t1108__cirqle{display:none !important}
+#rec1381696641 .t1108__title{max-width:none;padding:0 6px}
+/* Строка-обещание под названием. Иерархию держим начертанием: название 700,
+   обещание 500. Цветом нельзя, на шалфейном фоне читается только зеленый. */
+#rec1381696641 .t1108__title strong:last-of-type{font-weight:500}
+#rec1381696641 .t1108__title strong:first-of-type{font-weight:700}
+/* На шалфейном фоне #a8bea2 белый заголовок давал контраст 1,8:1, золотой
+   подзаголовок 1,2:1, кремовая строка в карточке 1,8:1. Все три уходят в
+   фирменный темно-зеленый, это 5,7:1 и родной цвет текста сайта.
+   Иерархию держим начертанием, а не цветом. */
+#rec1381696641 .t-section__title{color:#1c4130 !important}
+#rec1381696641 .t-section__title span{color:#1c4130 !important}
+#rec1381696641 .t-section__title strong{font-weight:400}
+#rec1381696641 .t1108__title strong[style]{color:#1c4130 !important;font-weight:500}
+
+/* ---- ссылка "подробнее" в фирменном стиле ---- */
+.pp-more{display:inline-block;margin-top:14px;padding:0 0 3px;background:none;border:0;
+border-bottom:1px solid #c4a362;cursor:pointer;font-family:'Montserrat',sans-serif;
+font-size:12px;font-weight:400;letter-spacing:1px;text-transform:uppercase;color:#c4a362;
+transition:color .2s ease-in-out,border-color .2s ease-in-out}
+.pp-more:hover{color:#1c4130;border-color:#1c4130}
+
+/* ---- допзанятия: на карточке только название, вся информация в поп-апе ---- */
+/* Подзаголовок был кремовым на шалфейном фоне, контраст 1,8:1. Как и в блоке
+   «почему», уводим в фирменный темно-зеленый, это 5,7:1. */
+#rec1381696581 .t-section__descr,
+#rec1381696581 .t-section__descr *{color:#1c4130 !important}
+#rec1381696581 .t-card__descr{display:none !important}
+#rec1381696581 .t-card__title{margin-bottom:0 !important}
+#rec1381696581 .pp-more-wrap{padding:20px 30px 30px}
+#rec1381696581 .pp-more{display:block;box-sizing:border-box;width:100%;margin:0;padding:14px 10px;text-align:center;
+background:none;border:1px solid #1c4130;color:#1c4130;
+font-family:'Montserrat',sans-serif;font-size:12px;font-weight:400;letter-spacing:1px;
+text-transform:uppercase;cursor:pointer;
+transition:background-color .2s ease-in-out,border-color .2s ease-in-out}
+#rec1381696581 .pp-more:hover{background:#c4a362;border-color:#c4a362;color:#1c4130}
+@media screen and (max-width:960px){#rec1381696581 .pp-more-wrap{padding:18px 30px 26px}}
+
+/* ---- поп-ап подробностей ---- */
+.pp-modal{position:fixed;inset:0;z-index:100000;display:none;align-items:center;
+justify-content:center;padding:20px}
+.pp-modal.pp-open{display:flex}
+.pp-modal__bg{position:absolute;inset:0;background:rgba(20,44,32,.72)}
+.pp-modal__win{position:relative;width:100%;max-width:720px;max-height:86vh;overflow:auto;
+background:#f4f1e3;padding:clamp(28px,4vw,56px);animation:pp-in .35s ease-in-out}
+@keyframes pp-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.pp-modal__x{position:absolute;top:14px;right:14px;width:40px;height:40px;border:0;
+background:none;cursor:pointer;font-size:26px;line-height:1;color:#1c4130;
+transition:color .2s ease-in-out}
+.pp-modal__x:hover{color:#c4a362}
+.pp-modal__title{font-family:'Cormorant Garamond',Garamond,serif;font-size:clamp(28px,3.4vw,42px);
+line-height:1.1;color:#c4a362;margin:0 0 18px}
+.pp-modal__text{font-family:'Montserrat',sans-serif;font-size:16px;line-height:1.7;color:#1c4130}
+/* Портрет педагога. Без ограничения студийный кадр шел в полный размер и на
+   телефоне занимал весь поп-ап: имя и биография уходили за прокрутку.
+   Кадр не режем, только уменьшаем по высоте целиком. */
+.pp-modal__img{display:block;width:auto;height:auto;max-width:100%;max-height:min(46vh,440px);
+margin:0 0 22px}
+@media screen and (max-width:640px){
+.pp-modal{padding:12px}
+.pp-modal__win{max-height:92vh;padding:52px 22px 28px}
+.pp-modal__img{max-height:32vh;margin:0 auto 18px}
+.pp-modal__title{font-size:30px;margin-bottom:12px}
+.pp-modal__text{font-size:15px;line-height:1.65}}
+.pp-modal__text p{margin:0 0 14px}
+.pp-modal__text b{font-weight:600;color:#1c4130}
+.pp-modal__meta{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#1c4130}
+/* биография педагога приходит из родного поп-апа Tilda со своим крупным кеглем */
+.pp-modal__text div,.pp-modal__text div *{font-family:inherit;font-size:inherit !important;
+line-height:inherit !important;color:#1c4130 !important}
+.pp-modal__foot{margin-top:26px;padding-top:22px;border-top:1px solid rgba(28,65,48,.18);
+display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px}
+.pp-modal__foot .pp-cta{display:inline-block;padding:13px 24px;border:1px solid #1c4130;
+font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;
+color:#1c4130 !important;text-decoration:none;
+transition:background-color .2s ease-in-out,border-color .2s ease-in-out}
+.pp-modal__foot .pp-cta:hover{background:#c4a362;border-color:#c4a362}
+.pp-modal__foot .pp-ask{font-family:'Montserrat',sans-serif;font-size:14px;color:#1c4130}
+.pp-modal__foot .pp-ask a{color:#c4a362 !important;border-bottom:1px solid #c4a362;
+text-decoration:none;white-space:nowrap}
+
+.pp-hidden{display:none}
+</style> <div class="pp-modal" role="dialog" aria-modal="true" aria-hidden="true"> <div class="pp-modal__bg"></div> <div class="pp-modal__win"> <button class="pp-modal__x" type="button" aria-label="Close">&times;</button> <div class="pp-modal__title"></div> <div class="pp-modal__text"></div> </div> </div> <script>
+(function(){
+  function ready(fn){
+    if(window.t_onReady) return t_onReady(fn);
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fn);
+    else fn();
+  }
+  var modal;
+  function openModal(title,html){
+    if(!modal) return;
+    modal.querySelector('.pp-modal__title').innerHTML=title;
+    modal.querySelector('.pp-modal__text').innerHTML=html;
+    modal.classList.add('pp-open');
+    modal.setAttribute('aria-hidden','false');
+    document.documentElement.style.overflow='hidden';
+    modal.querySelector('.pp-modal__x').focus();
+  }
+  function closeModal(){
+    if(!modal) return;
+    modal.classList.remove('pp-open');
+    modal.setAttribute('aria-hidden','true');
+    document.documentElement.style.overflow='';
+  }
+
+  function team(){
+    // Подпись «View profile» убрана 05.10 по просьбе заказчицы. Карточка
+    // по-прежнему открывает биографию по клику на фото или имя.
+    var rec=document.getElementById('rec1381696861');
+    if(!rec) return;
+    if(!rec.querySelector('.pp-team-title')){
+      var h=document.createElement('div');
+      h.className='pp-team-title'; h.setAttribute('data-i18n','team_title');
+      h.textContent=(window.ppUI?window.ppUI('team_title'):'Paddington Park Team');
+      rec.insertBefore(h, rec.firstChild);
+    }
+    railNav(rec.querySelector('.t786__container'), 32);
+  }
+
+  function ageTabs(){
+    var wrap=document.querySelector('#rec1381696721 .t395__wrapper');
+    if(!wrap||wrap.__pp) return; wrap.__pp=1;
+    function center(tab){
+      if(!tab||window.innerWidth>960) return;
+      var w=wrap.getBoundingClientRect(), t=tab.getBoundingClientRect();
+      wrap.scrollBy({left:(t.left+t.width/2)-(w.left+w.width/2),behavior:'smooth'});
+    }
+    wrap.querySelectorAll('.t395__tab').forEach(function(tab){
+      tab.addEventListener('click',function(){ setTimeout(function(){center(tab);},60); });
+    });
+    setTimeout(function(){center(wrap.querySelector('.t395__tab_active'));},400);
+  }
+
+  // стрелки над лентой. Одинаковые для команды, «почему» и возрастов
+  function railNav(track, gap, host){
+    if(!track||track.__ppnav) return; track.__ppnav=1;
+    var nav=document.createElement('div');
+    nav.className='pp-rail-nav';
+    nav.innerHTML='<button class="pp-nav" type="button" aria-label="Previous">'
+      +'<svg viewBox="0 0 40 40" preserveAspectRatio="xMidYMid meet"><path d="M23 13L15.5 20L23 27" vector-effect="non-scaling-stroke"/></svg></button>'
+      +'<button class="pp-nav" type="button" aria-label="Next">'
+      +'<svg viewBox="0 0 40 40" preserveAspectRatio="xMidYMid meet" style="transform:scaleX(-1)"><path d="M23 13L15.5 20L23 27" vector-effect="non-scaling-stroke"/></svg></button>';
+    (host||track.parentNode).insertBefore(nav, track);
+    var btns=nav.querySelectorAll('.pp-nav');
+    function step(){ var c=track.firstElementChild; return c? c.getBoundingClientRect().width+gap : 300; }
+    function sgn(){ return getComputedStyle(track).direction==='rtl' ? -1 : 1; }
+    function sync(){
+      var pos=Math.abs(track.scrollLeft), max=track.scrollWidth-track.clientWidth;
+      nav.style.display = max < 8 ? 'none' : '';
+      btns[0].disabled = pos < 6;
+      btns[1].disabled = pos > max - 6;
+    }
+    btns[0].addEventListener('click',function(){ track.scrollBy({left:-sgn()*step()*2,behavior:'smooth'}); });
+    btns[1].addEventListener('click',function(){ track.scrollBy({left: sgn()*step()*2,behavior:'smooth'}); });
+    track.addEventListener('scroll',sync,{passive:true});
+    window.addEventListener('resize',sync);
+    setTimeout(sync,300); sync();
+  }
+
+  // возрасты: список направлений развития становится лентой со свайпом
+  function ages(){
+    ['rec1381696741','rec1381696761','rec1381696781','rec1381696801','rec1381696821']
+      .forEach(function(id){
+        var rec=document.getElementById(id);
+        if(!rec) return;
+        var ul=rec.querySelector('.t1115__features');
+        if(!ul||ul.classList.contains('pp-feat-rail')) return;
+        if(!ul.querySelector('.t1115__feature')) return;
+        ul.classList.add('pp-feat-rail');
+        ul.querySelectorAll('.t1115__feature').forEach(function(li){
+          if(li.__pp) return; li.__pp=1;
+          var t=li.querySelector('.t1115__feature-title');
+          var d=li.querySelector('.t1115__feature-descr');
+          if(!t||!d) return;
+          var b=document.createElement('button');
+          b.type='button'; b.className='pp-more'; b.setAttribute('data-i18n','read_more');
+          b.textContent=(window.ppUI?window.ppUI('read_more'):'Read more');
+          b.addEventListener('click',function(e){
+            e.preventDefault();
+            // текст читаем в момент клика: при смене языка он уже переведен
+            openModal(t.textContent.trim(), '<p>'+d.innerHTML+'</p>');
+          });
+          li.querySelector('.t1115__feature-text-wrap').appendChild(b);
+        });
+        railNav(ul, 22, ul.parentNode);
+      });
+  }
+
+  var WHY_SWAP=["https://static.tildacdn.com/tild3037-3464-4935-b139-383337363436/pp-why-oval.jpg", "https://static.tildacdn.com/tild3566-3761-4662-a436-646238343762/pp-why-park.jpg", "https://static.tildacdn.com/tild6464-6461-4637-a364-393566326564/pp-why-hall.jpg"], WHY_NEW=[{"img": "https://static.tildacdn.com/tild3336-3132-4562-b765-326535393530/pp-why-climb.jpg", "title": "Climbing, Balancing, Landing on Sand", "sub": "Wooden frames, slides and swings over a soft sand floor."}, {"img": "https://static.tildacdn.com/tild6362-3036-4835-b935-333865336563/pp-why-medical.jpg", "title": "Health and Wellbeing on Campus", "sub": "A dedicated medical room inside the building, a few steps from every classroom."}];
+
+  // скриншоты меняем на съемку, следом дописываем второй ряд карточек
+  function whyCards(){
+    var rec=document.getElementById('rec1381696641');
+    if(!rec||rec.__ppw) return;
+    var cols=[].slice.call(rec.querySelectorAll('.t1108__col'));
+    if(!cols.length) return;
+    rec.__ppw=1;
+    // родные карточки помечаем: у них горизонтальные кадры и своя высота полосы
+    cols.forEach(function(col){ col.classList.add('pp-why-orig'); });
+    // если фото уже заменили руками в Tilda, наши ссылки не навязываем
+    cols.forEach(function(col,i){
+      var bg=col.querySelector('.t1108__bgimg');
+      if(!bg||!WHY_SWAP[i]) return;
+      if((bg.getAttribute('data-original')||'').indexOf('Screenshot_')<0) return;
+      bg.setAttribute('data-original',WHY_SWAP[i]);
+    });
+    var host=cols[0].parentNode;
+    host.classList.add('pp-why-grid');
+    var have=rec.textContent||'';
+    WHY_NEW.forEach(function(card){
+      if(have.indexOf(card.title)>=0) return;   // карточка уже собрана в Tilda
+      var col=cols[0].cloneNode(true);
+      col.classList.remove('pp-why-orig');
+      col.querySelectorAll('[field],[bgimgfield],[data-elem-id]').forEach(function(el){
+        el.removeAttribute('field'); el.removeAttribute('bgimgfield');
+        el.removeAttribute('data-elem-id');
+      });
+      var bg=col.querySelector('.t1108__bgimg');
+      if(bg){
+        bg.setAttribute('data-original',card.img);
+        bg.style.backgroundImage='';
+        var meta=bg.querySelector('meta');
+        if(meta) meta.setAttribute('content',card.img);
+      }
+      var box=col.querySelector('.t1108__title');
+      if(box) box.innerHTML='<strong>'+card.title+'</strong><br><br>'+
+        '<strong>'+card.sub+'</strong>';
+      host.appendChild(col);
+    });
+    railNav(host, 26);
+  }
+
+  function why(){
+    whyCards();
+    // фоновая картинка режется по краям, поэтому ставим настоящий img
+    document.querySelectorAll('#rec1381696641 .t1108__imgwrapper').forEach(function(wrap){
+      if(wrap.__pp) return; wrap.__pp=1;
+      var bg=wrap.querySelector('.t1108__bgimg');
+      if(!bg) return;
+      var src=bg.getAttribute('data-original');
+      if(!src){
+        var m=/url\(["']?([^"')]+)/.exec(bg.style.backgroundImage||'');
+        if(m) src=m[1];
+      }
+      if(!src) return;
+      var img=document.createElement('img');
+      img.className='pp-photo'; img.src=src; img.alt=''; img.loading='lazy';
+      wrap.insertBefore(img, bg);
+    });
+
+    // На карточке остаются название и строка-обещание. Длинный текст снят по
+    // созвону 09.09 вместе с «Read more»: «здесь больше ничего не скажешь,
+    // дальше уже пусть приходят, мы им расскажем».
+    document.querySelectorAll('#rec1381696641 .t1108__title').forEach(function(box){
+      if(box.__pp) return; box.__pp=1;
+      var parts=box.innerHTML.split(/(?:<br\s*\/?>\s*){2,}/i);
+      if(parts.length<3) return;
+      box.innerHTML=parts.slice(0,2).join('<br><br>');
+    });
+  }
+
+  var LONG={"ballet & creative dance": "<p>Classical ballet is a refined art form that blends technique, musicality, and storytelling. It builds strength, posture, and coordination while encouraging elegance and self-expression. From an early age, it fosters discipline, confidence, and a deep appreciation for the arts. Provided by Partner, &ldquo;Dream It Possible&rdquo;.</p><p><b>In class.</b> A gentle warm up on the floor, simple barre work adapted to little bodies, and a short creative dance where children invent their own movement to live piano or classical recordings. Groups are small and split by age, so a two year old and a pre-schooler are never asked to do the same thing.</p><p><b>What your child takes away.</b> Balance and posture, an ear for rhythm, the patience to learn a sequence step by step, and the confidence to perform in front of an audience in our own theatre.</p><p><b>Practical.</b> From 1 session per week. Soft ballet shoes and comfortable clothing, everything else is provided. A trial class is free, and you are welcome to watch it.</p>", "football": "<p>Football helps young children develop coordination, balance, confidence, and teamwork through active play and movement. Through fun games and age-appropriate activities, children improve listening skills, social interaction, and healthy physical development.</p><p><b>In class.</b> Sessions run on our own outdoor pitch inside the park, with size appropriate balls and goals. The hour is built around games rather than drills: dribbling races, passing in pairs, small sided matches where everyone touches the ball often.</p><p><b>What your child takes away.</b> Coordination and stamina, the habit of listening to a coach in a noisy space, and the first experience of playing on a team where the result belongs to everyone.</p><p><b>Practical.</b> From 1 session per week. Trainers and a water bottle, kit is provided. In the hottest months sessions move indoors to the gym.</p>", "theatre & drama": "<p>Our T&amp;D programme nurtures confidence, creativity, communication, and self-expression through imaginative play, storytelling, movement, and performance. Children explore emotions, build social skills, and develop stage confidence in a warm and encouraging environment designed to inspire every young performer.</p><p><b>In class.</b> Children work on a real stage, with curtains, lighting and costumes. A session moves from warm up games to a story the group acts out together, and every few weeks the story turns into a short performance for parents.</p><p><b>What your child takes away.</b> Clear speech and eye contact, the vocabulary to name what they feel, and the courage to stand in front of people and be seen. This is the skill that shows up years later in school presentations and interviews.</p><p><b>Practical.</b> From 1 session per week, in our own theatre on campus. No experience needed and no lines to learn at home.</p>", "music & rhythm": "<p>Our Music &amp; Rhythm programme introduces children to the joy of music through singing, movement, instruments, and interactive musical experiences. The sessions support language development, coordination, confidence, and self-expression while nurturing a lifelong love for music in a playful and engaging environment.</p><p><b>In class.</b> Children sing, clap and move to live guitar and percussion, then take turns on real instruments: drums, shakers, xylophones, keyboard. Songs are repeated across the term on purpose, because repetition is how a young child learns pitch and pulse.</p><p><b>What your child takes away.</b> A steadier sense of rhythm, a wider vocabulary through song, and the fine motor control that comes from holding and playing an instrument.</p><p><b>Practical.</b> From 1 session per week in a dedicated music room. All instruments are provided.</p>", "languages & culture": "<p>Our Languages &amp; Culture programme introduces children to French, Spanish, Mandarin, and Russian through engaging, age-appropriate experiences designed to inspire confidence and curiosity. Classes are available both for native speakers and for children learning an additional language in a playful and immersive environment. Other languages available upon request.</p><p><b>In class.</b> No worksheets and no translation. Teachers speak the language throughout the session and children pick it up the way they picked up their first language: through songs, movement games, cooking, stories and objects they can hold.</p><p><b>What your child takes away.</b> An ear tuned to sounds their first language does not have, a working set of everyday phrases, and the relaxed assumption that people around them speak differently and that is normal.</p><p><b>Practical.</b> From 2 sessions per week. Native speaker groups and beginner groups run separately, so nobody is bored and nobody is lost.</p>", "arts & creativity": "<p>From painting like Monet to drawing on rocks like ancient people, our Fine Arts programme explores the many ways humanity has expressed creativity throughout history. Children experiment with natural pigments, create colours from spices, mix primary colours, and discover a wide range of artistic tools and techniques, encouraging imagination, curiosity, and joyful self-expression through art.</p><p><b>In class.</b> Each block of sessions follows one idea, for example cave painting, or the way the Impressionists used light. Children grind spices into pigment, mix their own colours, and work on paper, fabric, clay and stone rather than only on a page.</p><p><b>What your child takes away.</b> Fine motor control, colour theory learned by hand instead of by rule, and the understanding that a picture can be made from almost anything.</p><p><b>Practical.</b> From 1 session per week. Aprons and all materials are provided, and finished work goes home or onto the wall.</p>"};
+
+  function enrich(){
+    document.querySelectorAll('#rec1381696581 .t1196__content-inner').forEach(function(card){
+      if(card.__pp) return; card.__pp=1;
+      var d=card.querySelector('.t-card__descr');
+      var t=card.querySelector('.t-card__title');
+      var u=card.querySelector('.t-card__uptitle');
+      if(!d||!t) return;
+
+      var b=document.createElement('button');
+      b.type='button'; b.className='pp-more'; b.setAttribute('data-i18n','explore_class');
+      b.textContent=(window.ppUI?window.ppUI('explore_class'):'Explore this class');
+      b.addEventListener('click',function(e){
+        e.preventDefault(); e.stopPropagation();
+        var name=t.textContent.trim();
+        var ar=window.ppEnrich? window.ppEnrich(name) : null;
+        var full=ar || LONG[name.toLowerCase()] || ('<p>'+d.innerHTML+'</p>');
+        var L=function(k,f){ return window.ppUI? window.ppUI(k) : f; };
+        var foot='<div class="pp-modal__foot">'
+          +'<a class="pp-cta" href="#popup:trial">'+L('trial_cta','Have a trial class')+'</a>'
+          +'<span class="pp-ask">'+L('ask_teacher','Want to know who teaches this class?')+' '
+          +'<a href="#popup:tour">'+L('ask_tour','Ask us on a tour')+'</a></span></div>';
+        openModal(name, (u? '<p class="pp-modal__meta">'+u.textContent.trim()+'</p>':'')+full+foot);
+      });
+      var wrap=document.createElement('div');
+      wrap.className='pp-more-wrap'; wrap.appendChild(b);
+      var item=card.closest('.t1196__item') || card.parentNode;
+      item.appendChild(wrap);
+    });
+  }
+
+  function init(){
+    modal=document.querySelector('.pp-modal');
+    if(modal && !modal.__pp){
+      modal.__pp=1;
+      modal.addEventListener('click',function(e){
+        if(e.target.classList.contains('pp-modal__bg')||e.target.closest('.pp-modal__x')) closeModal();
+      });
+      document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
+    }
+    team(); ageTabs(); ages(); why(); enrich();
+    if(window.ppSync) window.ppSync();
+  }
+  // отдаем наружу: сборка страницы целиком пользуется тем же поп-апом и лентами
+  window.ppOpen = function(t,h){ openModal(t,h); };
+  window.ppRail = function(track,gap,host){ railNav(track,gap,host); };
+  window.ppAges = function(){ ages(); if(window.ppSync) window.ppSync(); };
+
+  ready(function(){
+    init();
+    // Tilda достраивает слайдеры асинхронно, поэтому пробуем еще пару раз
+    setTimeout(init,600); setTimeout(init,1800); setTimeout(init,4000);
+  });
+  document.addEventListener('pp:lang', function(){ setTimeout(init,60); });
+})();
+</script> <div class="r t-rec t-rec_pt_45 t-rec_pb_150" data-bg-color="#a8bea2" data-record-type="1108" id="rec1381696641" style="padding-top:45px;padding-bottom:150px;background-color:#a8bea2; "> <!-- t1108 --> <div class="t1108" data-blocks-count="3"> <div class="t-section__container t-container t-container_flex js-block-header"> <div class="t-col t-col_12"> <h2 class="js-block-header-title t-section__title t-title t-title_xs t-align_center t-margin_auto" data-editable="true" field="btitle"> <span style="color: rgb(245, 241, 228);">ما الذي يميّز بادينغتون بارك؟</span><strong>مصمَّم للأطفال، متصل بالطبيعة، ومبني لكل جانب من جوانب النمو.</strong> </h2> </div> </div> <style>.t-section__title,.t-section__descr{overflow-wrap:break-word;}.t-section__descr{max-width:560px;}#rec1381696641 .t-section__title{margin-bottom:105px;}#rec1381696641 .t-section__descr{}#rec1381696641 .t-section__container:not(:has(.t-section__descr)) .t-section__title{margin-bottom:105px;}@media screen and (max-width:960px){#rec1381696641 .t-section__title{margin-bottom:45px;}#rec1381696641 .t-section__container:not(:has(.t-section__descr)) .t-section__title{margin-bottom:45px;}}</style> <style>#rec1381696641 .t-section__title{color:#c4a362;font-family:'Cormorant Garamond';}@media screen and (min-width:900px){#rec1381696641 .t-section__title{font-size:52px;}}</style> <div class="t1108__container t-container"> <div class="t1108__col t-col t-col_4"> <div class="t1108__imgwrapper t-align_center"> <div bgimgfield="li_img__3278461103020" class="t1108__bgimg t-margin_auto t-bgimg" data-original="https://static.tildacdn.com/tild3830-6362-4439-b664-393234343230/Screenshot_2026-05-3.png" itemscope="" itemtype="http://schema.org/ImageObject" style="background-image:url('https://static.tildacdn.com/tild3830-6362-4439-b664-393234343230/Screenshot_2026-05-3.png');"> <meta content="https://static.tildacdn.com/tild3830-6362-4439-b664-393234343230/Screenshot_2026-05-3.png" itemprop="image"/> </div> </div> <div class="t1108__textwrapper t-align_center"> <div class="t1108__title t-name t-name_xs" field="li_title__3278461103020"><strong>حرم بيضاوي مبني خصيصاً</strong><br/><br/><strong style="color: rgb(246, 241, 227);">حرم تعليمي مبني خصيصاً بمساحة 29,000 قدم مربع، مصمم بالكامل حول الطفل.</strong><br/><br/>صُمم بادينغتون بارك من أساسه ليكون بيئة تعليمية. تخلق عمارته البيضاوية الفريدة إحساساً بالأمان والترابط والانسياب الطبيعي، وتساعد الأطفال على التنقل في محيطهم بثقة.</div> </div> </div> <div class="t1108__col t-col t-col_4"> <div class="t1108__line-mobile t-align_center"> <div class="t1108__cirqle"></div> <div class="t1108__cirqle"></div> <div class="t1108__cirqle"></div> </div> <div class="t1108__imgwrapper t-align_center"> <div bgimgfield="li_img__3278461103021" class="t1108__bgimg t-margin_auto t-bgimg" data-original="https://static.tildacdn.com/tild6637-3431-4435-b361-303231376564/Screenshot_2026-05-3.png" itemscope="" itemtype="http://schema.org/ImageObject" style="background-image:url('https://static.tildacdn.com/tild6637-3431-4435-b361-303231376564/Screenshot_2026-05-3.png');"> <meta content="https://static.tildacdn.com/tild6637-3431-4435-b361-303231376564/Screenshot_2026-05-3.png" itemprop="image"/> </div> <div class="t1108__line"> <div class="t1108__cirqle"></div> </div> </div> <div class="t1108__textwrapper t-align_center"> <div class="t1108__title t-name t-name_xs" field="li_title__3278461103021"><strong>حديقة في قلب الحضانة</strong><br/><br/><strong style="color: rgb(246, 241, 227);">30,000 قدم مربع من اللعب الخارجي ومساحات التعلم المستوحاة من الطبيعة.</strong><br/><br/>لا يزور الأطفال ملعباً ثم يعودون، بل يقضون يومهم في بيئة أشبه بالحديقة مصممة للحركة والاستكشاف والإبداع والعافية. التجربة الخارجية جزء من التعلم اليومي، لا نشاط عارض من حين لآخر.</div> </div> </div> <div class="t1108__col t-col t-col_4"> <div class="t1108__line-mobile t-align_center"> <div class="t1108__cirqle"></div> <div class="t1108__cirqle"></div> <div class="t1108__cirqle"></div> </div> <div class="t1108__imgwrapper t-align_center"> <div bgimgfield="li_img__3278461103022" class="t1108__bgimg t-margin_auto t-bgimg" data-original="https://static.tildacdn.com/tild3937-3735-4536-b561-656633333236/Screenshot_2026-05-3.png" itemscope="" itemtype="http://schema.org/ImageObject" style="background-image:url('https://static.tildacdn.com/tild3937-3735-4536-b561-656633333236/Screenshot_2026-05-3.png');"> <meta content="https://static.tildacdn.com/tild3937-3735-4536-b561-656633333236/Screenshot_2026-05-3.png" itemprop="image"/> </div> <div class="t1108__line"> <div class="t1108__cirqle"></div> </div> </div> <div class="t1108__textwrapper t-align_center"> <div class="t1108__title t-name t-name_xs" field="li_title__3278461103022"><strong>تجربة طفولة متكاملة تحت سقف واحد</strong><br/><br/><strong style="color: rgb(246, 241, 227);">مسرح وصالة رياضية وفنون وموسيقى ومرافق إثرائية، كلها داخل الحرم.</strong><br/><br/>يتيح بادينغتون بارك للأطفال أن يؤدوا ويبتكروا ويتحركوا ويكتشفوا كل يوم دون مغادرة الحرم. من العروض المسرحية والرياضة إلى الموسيقى والفنون، يستكشف الأطفال اهتمامات متنوعة في مساحات مصممة لذلك.</div> </div> </div> </div> <div class="t-section__container t-container"> <div class="t-col t-col_12"> <div class="t-section__bottomwrapper t-clear t-align_center"> <a class="t-btn t-btnflex t-btnflex_type_bbutton t-btnflex_md pp-to-form" href="#pp-form"><span class="t-btnflex__text">انضموا إلينا لمعرفة المزيد</span> <style>#rec1381696641 .t-btnflex.t-btnflex_type_bbutton{color:#f4f1e3;background-color:#c4a362;--border-width:0px;border-style:none !important;border-radius:0px;box-shadow:none !important;font-family:Montserrat;font-weight:500;transition-duration:0.2s;transition-property:background-color,color,border-color,box-shadow,opacity,transform,gap;transition-timing-function:ease-in-out;}@media (hover:hover){#rec1381696641 .t-btnflex.t-btnflex_type_bbutton:not(.t-animate_no-hover):hover{color:#f4f1e3 !important;background-color:#1c4130 !important;}#rec1381696641 .t-btnflex.t-btnflex_type_bbutton:not(.t-animate_no-hover):focus-visible{color:#f4f1e3 !important;background-color:#1c4130 !important;}}</style></a> </div> </div> </div> </div> <style>#rec1381696641 .t1108__cirqle{background-color:#1d4130;}#rec1381696641 .t1108__bgimg{width:150px;height:150px;border-width:1px;border-color:#1c4130;}</style> <style>#rec1381696641 .t1108__title{font-size:16px;color:#1c4130;font-family:'Montserrat';font-weight:500;}</style> </div> <a name="EYFSBritishCurriculum" style="font-size:0;"></a> <div class="r t-rec t-rec_pt_90" data-bg-color="#1c4130" data-record-type="396" id="rec1399067921" style="padding-top:90px;background-color:#1c4130; "> <!-- T396 --> <style>#rec1399067921 .t396__artboard{height:150px;background-color:#1c4130;}#rec1399067921 .t396__filter{height:150px;}#rec1399067921 .t396__carrier{height:150px;background-position:center center;background-attachment:scroll;background-size:cover;background-repeat:no-repeat;}@media screen and (max-width:1199px){#rec1399067921 .t396__artboard,#rec1399067921 .t396__filter,#rec1399067921 .t396__carrier{height:300px;}#rec1399067921 .t396__filter{}#rec1399067921 .t396__carrier{background-attachment:scroll;}}@media screen and (max-width:959px){#rec1399067921 .t396__artboard,#rec1399067921 .t396__filter,#rec1399067921 .t396__carrier{height:300px;}#rec1399067921 .t396__filter{}#rec1399067921 .t396__carrier{background-attachment:scroll;}}@media screen and (max-width:639px){#rec1399067921 .t396__artboard,#rec1399067921 .t396__filter,#rec1399067921 .t396__carrier{height:220px;}#rec1399067921 .t396__filter{}#rec1399067921 .t396__carrier{background-attachment:scroll;}}@media screen and (max-width:479px){#rec1399067921 .t396__artboard,#rec1399067921 .t396__filter,#rec1399067921 .t396__carrier{height:200px;}#rec1399067921 .t396__filter{}#rec1399067921 .t396__carrier{background-attachment:scroll;}}#rec1399067921 .tn-elem[data-elem-id="1479129336218"]{color:#c4a362;z-index:3;top:0px;left:calc(50% - 580px + 0px);width:1160px;height:auto;}#rec1399067921 .tn-elem[data-elem-id="1479129336218"] .tn-atom{vertical-align:middle;color:#c4a362;font-size:52px;font-family:'Cormorant Garamond',Arial,sans-serif;line-height:1.55;font-weight:600;background-position:center center;border-width:var(--t396-borderwidth,0);border-style:var(--t396-borderstyle,solid);border-color:var(--t396-bordercolor,transparent);transition:background-color var(--t396-speedhover,0s) ease-in-out,color var(--t396-speedhover,0s) ease-in-out,border-color var(--t396-speedhover,0s) ease-in-out,box-shadow var(--t396-shadowshoverspeed,0.2s) ease-in-out;text-shadow:var(--t396-shadow-text-x,0px) var(--t396-shadow-text-y,0px) var(--t396-shadow-text-blur,0px) rgba(var(--t396-shadow-text-color),var(--t396-shadow-text-opacity,100%));}@media screen and (max-width:1199px){#rec1399067921 .tn-elem[data-elem-id="1479129336218"]{display:table;top:90px;left:calc(50% - 470px + 1px);width:940px;height:auto;}#rec1399067921 .tn-elem[data-elem-id="1479129336218"] .tn-atom{white-space:normal;font-size:40px;background-size:cover;}}@media screen and (max-width:959px){#rec1399067921 .tn-elem[data-elem-id="1479129336218"]{display:table;top:81px;left:calc(50% - 310px + 0px);width:620px;height:auto;}#rec1399067921 .tn-elem[data-elem-id="1479129336218"] .tn-atom{white-space:normal;background-size:cover;}}@media screen and (max-width:639px){#rec1399067921 .tn-elem[data-elem-id="1479129336218"]{display:table;top:54px;left:calc(50% - 230px + 0px);width:460px;height:auto;}#rec1399067921 .tn-elem[data-elem-id="1479129336218"] .tn-atom{white-space:normal;font-size:30px;line-height:1.3;background-size:cover;}}@media screen and (max-width:479px){#rec1399067921 .tn-elem[data-elem-id="1479129336218"]{display:table;top:36px;left:calc(50% - 150px + 20px);width:300px;height:auto;}#rec1399067921 .tn-elem[data-elem-id="1479129336218"] .tn-atom{white-space:normal;background-size:cover;}}#rec1399067921 .tn-elem[data-elem-id="1479129336226"]{color:#f4f1e3;z-index:3;top:97px;left:calc(50% - 280px + -300px);width:560px;height:auto;}#rec1399067921 .tn-elem[data-elem-id="1479129336226"] .tn-atom{vertical-align:middle;color:#f4f1e3;font-size:18px;font-family:'Montserrat',Arial,sans-serif;line-height:1.5;font-weight:400;background-position:center center;border-width:var(--t396-borderwidth,0);border-style:var(--t396-borderstyle,solid);border-color:var(--t396-bordercolor,transparent);transition:background-color var(--t396-speedhover,0s) ease-in-out,color var(--t396-speedhover,0s) ease-in-out,border-color var(--t396-speedhover,0s) ease-in-out,box-shadow var(--t396-shadowshoverspeed,0.2s) ease-in-out;text-shadow:var(--t396-shadow-text-x,0px) var(--t396-shadow-text-y,0px) var(--t396-shadow-text-blur,0px) rgba(var(--t396-shadow-text-color),var(--t396-shadow-text-opacity,100%));}@media screen and (max-width:1199px){#rec1399067921 .tn-elem[data-elem-id="1479129336226"]{display:table;top:169px;left:calc(50% - 280px + -189px);width:px;height:auto;}#rec1399067921 .tn-elem[data-elem-id="1479129336226"] .tn-atom{white-space:normal;font-size:18px;background-size:cover;}}@media screen and (max-width:959px){#rec1399067921 .tn-elem[data-elem-id="1479129336226"]{display:table;top:159px;left:calc(50% - 280px + -29px);width:px;height:auto;}#rec1399067921 .tn-elem[data-elem-id="1479129336226"] .tn-atom{white-space:normal;background-size:cover;}}@media screen and (max-width:639px){#rec1399067921 .tn-elem[data-elem-id="1479129336226"]{display:table;top:102px;left:calc(50% - 230px + 0px);width:460px;height:auto;}#rec1399067921 .tn-elem[data-elem-id="1479129336226"] .tn-atom{white-space:normal;font-size:16px;line-height:1.4;background-size:cover;}}@media screen and (max-width:479px){#rec1399067921 .tn-elem[data-elem-id="1479129336226"]{display:table;top:83px;left:calc(50% - 150px + 20px);width:300px;height:auto;}#rec1399067921 .tn-elem[data-elem-id="1479129336226"] .tn-atom{white-space:normal;background-size:cover;}}</style> <div class="t396"> <div class="t396__artboard" data-artboard-height="150" data-artboard-height-res-320="200" data-artboard-height-res-480="220" data-artboard-height-res-640="300" data-artboard-height-res-960="300" data-artboard-recid="1399067921" data-artboard-screens="320,480,640,960,1200" data-artboard-upscale="grid" data-artboard-valign="center"> <div class="t396__carrier" data-artboard-recid="1399067921"></div> <div class="t396__filter" data-artboard-recid="1399067921"></div> <div class="t396__elem tn-elem tn-elem__13990679211479129336218" data-elem-id="1479129336218" data-elem-type="text" data-field-axisx-value="center" data-field-axisy-value="top" data-field-container-value="grid" data-field-fontsize-res-480-value="30" data-field-fontsize-res-960-value="40" data-field-fontsize-value="52" data-field-height-value="81" data-field-heightunits-value="px" data-field-left-res-320-value="20" data-field-left-res-480-value="0" data-field-left-res-640-value="0" data-field-left-res-960-value="1" data-field-left-value="0" data-field-leftunits-value="px" data-field-textfit-value="autoheight" data-field-top-res-320-value="36" data-field-top-res-480-value="54" data-field-top-res-640-value="81" data-field-top-res-960-value="90" data-field-top-value="0" data-field-topunits-value="px" data-field-width-res-320-value="300" data-field-width-res-480-value="460" data-field-width-res-640-value="620" data-field-width-res-960-value="940" data-field-width-value="1160" data-field-widthunits-value="px"> <div class="tn-atom" field="tn_text_1479129336218">المنهج البريطاني: EYFS</div> </div> <div class="t396__elem tn-elem tn-elem__13990679211479129336226" data-elem-id="1479129336226" data-elem-type="text" data-field-axisx-value="center" data-field-axisy-value="top" data-field-container-value="grid" data-field-fontsize-res-480-value="16" data-field-fontsize-res-960-value="18" data-field-fontsize-value="18" data-field-height-value="27" data-field-heightunits-value="px" data-field-left-res-320-value="20" data-field-left-res-480-value="0" data-field-left-res-640-value="-29" data-field-left-res-960-value="-189" data-field-left-value="-300" data-field-leftunits-value="px" data-field-textfit-value="autoheight" data-field-top-res-320-value="83" data-field-top-res-480-value="102" data-field-top-res-640-value="159" data-field-top-res-960-value="169" data-field-top-value="97" data-field-topunits-value="px" data-field-width-res-320-value="300" data-field-width-res-480-value="460" data-field-width-value="560" data-field-widthunits-value="px"> <div class="tn-atom" field="tn_text_1479129336226">ننمو معاً من عمر 45 يوماً حتى التخرج من FS2</div> </div> </div> </div> <!-- /T396 --> </div> <div class="r t-rec t-rec_pt_30 t-rec_pb_60" data-animationappear="off" data-bg-color="#1c4130" data-record-type="395" id="rec1381696721" style="padding-top:30px;padding-bottom:60px;background-color:#1c4130; "> <!-- t395 --> <div class="t395"> <div class="t-container"> <div class="t395__col t-width t-width_12"> <ul class="t395__wrapper t-align_center" data-tab-current="1" role="tablist"> <li class="t395__tab t395__tab_active t395__width_20" data-tab-number="1" data-tab-rec-ids="1381696741" role="presentation"> <button aria-controls="rec1381696741" aria-selected="false" class="t395__title t-name t-name_xs" data-redactor-notoolbar="yes" field="title" id="tab1_1381696721" role="tab" tabindex="-1" type="button">من 0 إلى 1 سنة<br/>البداية الأولى</button> </li> <li class="t395__tab t395__width_20" data-tab-number="2" data-tab-rec-ids="1381696761" role="presentation"> <button aria-controls="rec1381696761" aria-selected="false" class="t395__title t-name t-name_xs" data-redactor-notoolbar="yes" field="title2" id="tab2_1381696721" role="tab" tabindex="-1" type="button">من 1 إلى 2 سنة<br/>بداية النمو الاجتماعي</button> </li> <li class="t395__tab t395__width_20" data-tab-number="3" data-tab-rec-ids="1381696781" role="presentation"> <button aria-controls="rec1381696781" aria-selected="false" class="t395__title t-name t-name_xs" data-redactor-notoolbar="yes" field="title3" id="tab3_1381696721" role="tab" tabindex="-1" type="button">من 2 إلى 3 سنوات<br/>ثقة تنمو</button> </li> <li class="t395__tab t395__width_20" data-tab-number="4" data-tab-rec-ids="1381696801" role="presentation"> <button aria-controls="rec1381696801" aria-selected="false" class="t395__title t-name t-name_xs" data-redactor-notoolbar="yes" field="title4" id="tab4_1381696721" role="tab" tabindex="-1" type="button">من 3 إلى 4 سنوات<br/>أسس التعلّم</button> </li> <li class="t395__tab t395__width_20" data-tab-number="5" data-tab-rec-ids="1381696821" role="presentation"> <button aria-controls="rec1381696821" aria-selected="false" class="t395__title t-name t-name_xs" data-redactor-notoolbar="yes" field="title5" id="tab5_1381696721" role="tab" tabindex="-1" type="button">من 4 إلى 5 سنوات<br/>جاهز للمدرسة</button> </li> </ul> <div class="t395__wrapper_mobile"> <div class="t395__firefoxfix"></div> <select class="t395__select t-name"> <option value="1381696741">من 0 إلى 1 سنة<br/>البداية الأولى</option> <option value="1381696761">من 1 إلى 2 سنة<br/>بداية النمو الاجتماعي</option> <option value="1381696781">من 2 إلى 3 سنوات<br/>ثقة تنمو</option> <option value="1381696801">من 3 إلى 4 سنوات<br/>أسس التعلّم</option> <option value="1381696821">من 4 إلى 5 سنوات<br/>جاهز للمدرسة</option> </select> </div> </div> </div> </div> <style>#rec1381696721 .t395__tab{border:1px solid #c4a362;background-color:#1c4130 !important;}#rec1381696721 .t395__tab.t395__tab_active{background-color:#1c4130 !important;border-color:#f4f1e3 !important;}#rec1381696721 .t395__tab_active:after{width:1px;top:-1px;right:-1px;bottom:-1px;background-color:#f4f1e3 !important;}#rec1381696721 .t395__tab_active .t395__title{color:#f4f1e3 !important;font-weight:500 !important;}#rec1381696721 .t395__tab:first-child{}#rec1381696721 .t395__tab:last-child{border-right:1px solid #c4a362 !important;}#rec1381696721 .t395__tab_active:last-child{border-right:1px solid #f4f1e3 !important;}#rec1381696721 .t395__select{border:none;color:#f4f1e3 !important;background-color:#1c4130 !important;font-family:Montserrat;}#rec1381696721 .t395__wrapper_mobile{border:1px solid #c4a362;}#rec1381696721 .t395__wrapper_mobile:after{border-color:#f4f1e3 transparent transparent transparent;}#rec1381696721 .t395__firefoxfix{top:1px;bottom:1px;right:1px;background-color:#1c4130 !important;}#allrecords [aria-labelledby$="1381696721"]:focus-visible{outline-color:#2015FF;outline-offset:2px;outline-style:auto;}</style> <style>#rec1381696721 .t395__title{font-size:14px;color:#c4a362;font-family:'Montserrat';font-weight:400;padding-top:14px;padding-bottom:14px;}</style> </div> <div class="r t-rec t-rec_pt_30 t-rec_pb_150 pp-age" data-bg-color="#1c4130" data-record-type="1115" id="rec1381696741" style="padding-top:30px;padding-bottom:150px;background-color:#1c4130; "> <!-- t1115 --> <div class="t1115"> <div class="t-container t-container_flex t1115__container_vbottom"> <div class="t-col t-col_7"> <div class="t1115__content"> <div class="t1115__textwrapper t-align_left"> <div class="t1115__uptitle t-uptitle t-uptitle_sm" field="subtitle"> <div data-customstyle="yes" style="font-size: 40px;">0-1</div> </div> <h2 class="t1115__title t-title t-title_xs" field="btitle">البداية الأولى</h2> </div> <ul class="t1115__features" role="list"> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__9857785390470" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__9857785390470">العافية العاطفية</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__9857785390470">في السنة الأولى من العمر تُبنى العافية العاطفية للطفل على الشعور بالأمان والحب والارتباط بمن يرعاه. التفاعلات الدافئة المستجيبة، كأن يُهدَّأ حين ينزعج أو يُبتسم له أثناء اللعب، تساعده على بناء الثقة والإحساس بالأمان. هذه التجارب المبكرة هي أساس التنظيم العاطفي السليم والعلاقات المستقبلية.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__9857785390471" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__9857785390471">التواصل المبكر</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__9857785390471">نمو الانتباه والإصغاء والاستجابات الأولى عبر التواصل البصري والأصوات والإيماءات والكلمات البسيطة. نبرة الصوت اللطيفة وإيقاع الكلام الهادئ والمعاملة المحبة هي مفاتيح دعم هذه المرحلة.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__1755676491261" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__1755676491261">النمو البدني</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__1755676491261">تطوير قوة الجذع والتناسق (التقلب والجلوس والحبو والوقوف)، إلى جانب الاستكشاف الحسي. نحرص على أن تكون البيئة داعمة وملبية لاحتياجات النمو البدني.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__1755676518525" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__1755676518525">الفضول</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__1755676518525">يبدأ الرضّع بملاحظة محيطهم واستكشافه والاستجابة له، وتظهر لديهم بوادر الفضول والرغبة في التعلم. نحرص على بيئة غنية بالمواد تغذي هذا الفضول كل يوم.</div> </div> </li> </ul> <div class="t1115__buttons"> <a class="t-btn t-btnflex t-btnflex_type_button t-btnflex_md js-click-stat pp-to-form" data-tilda-event-name="/tilda/click/rec1381696741/button1" href="#pp-form"><span class="t-btnflex__text">اطلب قائمة الأسعار</span> <style>#rec1381696741 .t-btnflex.t-btnflex_type_button{color:#f3f1e3;border-style:solid !important;border-color:#f3f1e3 !important;--border-width:1px;box-shadow:none !important;font-family:Montserrat;text-transform:uppercase;transition-duration:0.2s;transition-property:background-color,color,border-color,box-shadow,opacity,transform,gap;transition-timing-function:ease-in-out;}@media (hover:hover){#rec1381696741 .t-btnflex.t-btnflex_type_button:not(.t-animate_no-hover):hover{color:#f4f1e3 !important;border-color:#c4a362 !important;background-color:#c4a362 !important;}#rec1381696741 .t-btnflex.t-btnflex_type_button:not(.t-animate_no-hover):focus-visible{color:#f4f1e3 !important;border-color:#c4a362 !important;background-color:#c4a362 !important;}}</style></a> </div> </div> </div> <div class="t-col t-col_5 t1115__col-bottom"> <img alt="رضيع بزي بادينغتون بارك، غرفة الرضع (0–1 سنة)" class="t1115__image t-img" data-original="https://static.tildacdn.com/tild3966-3564-4361-a161-326438386631/1.jpg" decoding="async" imgfield="img5" loading="lazy" src="https://static.tildacdn.com/tild3966-3564-4361-a161-326438386631/1.jpg"/> </div> </div> </div> <style>#rec1381696741 .t1115__uptitle{font-size:20px;color:#c4a362;font-family:'Montserrat';text-transform:uppercase;padding-top:0px;}#rec1381696741 .t1115__title{color:#f4f1e3;}#rec1381696741 .t1115__feature-title{color:#c4a362;font-family:'Garamond';}#rec1381696741 .t1115__feature-descr{font-size:14px;color:#f4f1e3;font-family:'Montserrat';}</style> </div> <div class="r t-rec t-rec_pt_30 t-rec_pb_150 pp-age" data-bg-color="#1c4130" data-record-type="1115" id="rec1381696761" style="padding-top:30px;padding-bottom:150px;background-color:#1c4130; "> <!-- t1115 --> <div class="t1115"> <div class="t-container t-container_flex t1115__container_vmiddle"> <div class="t-col t-col_7"> <div class="t1115__content"> <div class="t1115__textwrapper t-align_left"> <div class="t1115__uptitle t-uptitle t-uptitle_sm" field="subtitle"> <div data-customstyle="yes" style="font-size: 46px;">1-2</div> </div> <h2 class="t1115__title t-title t-title_xs" field="btitle">الخطوات الأولى في النمو الاجتماعي</h2> </div> <ul class="t1115__features" role="list"> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__8812310973560" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__8812310973560">بداية الاستقلال والاعتماد على النفس</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__8812310973560">يبدأ الأطفال بإظهار استقلالهم عبر إطعام أنفسهم واتخاذ خيارات بسيطة وتجربة الأمور بأنفسهم. نقدم الدعم عند الحاجة مع تشجيع الاستقلال والثقة بالنفس.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__8812310973561" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__8812310973561">نمو اللغة والتواصل</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__8812310973561">تتوسع مفردات الطفل بسرعة، ويبدأ باستخدام جمل بسيطة والتعبير عن احتياجاته ومشاعره. نغذي هذا النمو بتفاعل مستمر: الحديث والغناء والقوافي والأسئلة البسيطة والكثير من الاستجابات الداعمة.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__8812310973562" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__8812310973562">الوعي الاجتماعي والعلاقات</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__8812310973562">يبدأ الأطفال باللعب المتوازي وإدراك وجود الآخرين ومحاولة المشاركة والتناوب بمساعدة. نرشدهم إلى تكوين الصداقات والمشاركة واللعب معاً واستخدام اللغة المناسبة، وهي بداية رحلة طويلة في النمو الاجتماعي.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__8812310973563" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__8812310973563">النمو البدني والتناسق</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__8812310973563">يواصل الأطفال تطوير حركتهم بالمشي والتسلق والجري، مع تحسّن المهارات الحركية الدقيقة كالتركيب واستخدام الأدوات والخربشة. في بادينغتون بارك ندعم الحركة بوقت ومساحة وافيين للاستكشاف النشط.</div> </div> </li> </ul> <div class="t1115__buttons"> <a class="t-btn t-btnflex t-btnflex_type_button t-btnflex_md pp-to-form" href="#pp-form"><span class="t-btnflex__text">اطلب قائمة الأسعار</span> <style>#rec1381696761 .t-btnflex.t-btnflex_type_button{color:#f3f1e3;border-style:solid !important;border-color:#f3f1e3 !important;--border-width:1px;box-shadow:none !important;font-family:Montserrat;transition-duration:0.2s;transition-property:background-color,color,border-color,box-shadow,opacity,transform,gap;transition-timing-function:ease-in-out;}@media (hover:hover){#rec1381696761 .t-btnflex.t-btnflex_type_button:not(.t-animate_no-hover):hover{color:#f4f1e3 !important;border-color:#c4a362 !important;background-color:#c4a362 !important;}#rec1381696761 .t-btnflex.t-btnflex_type_button:not(.t-animate_no-hover):focus-visible{color:#f4f1e3 !important;border-color:#c4a362 !important;background-color:#c4a362 !important;}}</style></a> </div> </div> </div> <div class="t-col t-col_5 t1115__col-bottom"> <img alt="طفل صغير في حضانة بادينغتون بارك، مجموعة 1–2 سنة" class="t1115__image t-img" data-original="https://static.tildacdn.com/tild6466-3038-4538-a664-343063333030/2.jpg" decoding="async" imgfield="img5" loading="lazy" src="https://static.tildacdn.com/tild6466-3038-4538-a664-343063333030/2.jpg"/> </div> </div> </div> <style>#rec1381696761 .t1115__uptitle{font-size:18px;color:#c4a362;font-family:'Montserrat';text-transform:uppercase;}#rec1381696761 .t1115__title{color:#f4f1e3;}#rec1381696761 .t1115__feature-title{color:#c4a362;font-family:'Garamond';}#rec1381696761 .t1115__feature-descr{font-size:14px;color:#f4f1e3;font-family:'Montserrat';}</style> </div> <div class="r t-rec t-rec_pt_30 t-rec_pb_150 pp-age" data-bg-color="#1c4130" data-record-type="1115" id="rec1381696781" style="padding-top:30px;padding-bottom:150px;background-color:#1c4130; "> <!-- t1115 --> <div class="t1115"> <div class="t-container t-container_flex t1115__container_vmiddle"> <div class="t-col t-col_7"> <div class="t1115__content"> <div class="t1115__textwrapper t-align_left"> <div class="t1115__uptitle t-uptitle t-uptitle_sm" field="subtitle"> <div data-customstyle="yes" style="font-size: 40px;">2-3</div> </div> <h2 class="t1115__title t-title t-title_xs" field="btitle">ثقة تنمو</h2> </div> <ul class="t1115__features" role="list"> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__3212318441410" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__3212318441410">استقلال متزايد وثقة بالنفس</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__3212318441410">يبدأ الأطفال بإدارة مهامهم الشخصية كارتداء الملابس والأكل والترتيب، ويتخذون خيارات بسيطة. نشجع الاستقلال مع تقديم الدعم والإرشاد عند الحاجة.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__3212318441411" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__3212318441411">لغة وتواصل أوسع</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__3212318441411">يكوّن الأطفال جملاً أطول ويطرحون الأسئلة ويتبعون تعليمات بسيطة ويعبرون عن أفكارهم ومشاعرهم بوضوح أكبر. ندعم ذلك بالحوار ورواية القصص والغناء والتفاعل المستجيب.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__3212318441412" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__3212318441412">تطور المهارات الاجتماعية والعاطفية</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__3212318441412">ينخرط الأطفال في لعب تعاوني وتخيلي أكثر، ويتناوبون ويشاركون ويزداد وعيهم بمشاعر الآخرين. ندعمهم في تكوين الصداقات وحل الخلافات الصغيرة وفهم المشاعر.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__3212318441413" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__3212318441413">تقدّم النمو البدني والحركي</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__3212318441413">تتقدم المهارات الحركية الكبرى والدقيقة عبر التسلق والجري والتوازن والرسم والتعامل مع الأشياء الصغيرة. نوفر مساحة وأنشطة وفرصاً وافية لتقوية التناسق والثقة والتحكم.</div> </div> </li> </ul> <div class="t1115__buttons"> <a class="t-btn t-btnflex t-btnflex_type_button t-btnflex_md pp-to-form" href="#pp-form"><span class="t-btnflex__text">اطلب قائمة الأسعار</span> <style>#rec1381696781 .t-btnflex.t-btnflex_type_button{color:#f3f1e3;border-style:solid !important;border-color:#f3f1e3 !important;--border-width:1px;border-radius:0px;box-shadow:none !important;font-family:Montserrat;transition-duration:0.2s;transition-property:background-color,color,border-color,box-shadow,opacity,transform,gap;transition-timing-function:ease-in-out;}@media (hover:hover){#rec1381696781 .t-btnflex.t-btnflex_type_button:not(.t-animate_no-hover):hover{color:#f4f1e3 !important;border-color:#c4a362 !important;background-color:#c4a362 !important;}#rec1381696781 .t-btnflex.t-btnflex_type_button:not(.t-animate_no-hover):focus-visible{color:#f4f1e3 !important;border-color:#c4a362 !important;background-color:#c4a362 !important;}}</style></a> </div> </div> </div> <div class="t-col t-col_5 t1115__col-bottom"> <img alt="طفل في فصل 2–3 سنوات في بادينغتون بارك" class="t1115__image t-img" data-original="https://static.tildacdn.com/tild3731-6536-4332-a139-383831643461/3.png" decoding="async" imgfield="img5" loading="lazy" src="https://static.tildacdn.com/tild3731-6536-4332-a139-383831643461/3.png"/> </div> </div> </div> <style>#rec1381696781 .t1115__uptitle{font-size:18px;color:#c4a362;font-family:'Montserrat';text-transform:uppercase;}#rec1381696781 .t1115__title{color:#f4f1e3;}#rec1381696781 .t1115__feature-title{color:#c4a362;font-family:'Garamond';}#rec1381696781 .t1115__feature-descr{font-size:14px;color:#f4f1e3;font-family:'Montserrat';}</style> </div> <div class="r t-rec t-rec_pt_30 t-rec_pb_150 pp-age" data-bg-color="#1c4130" data-record-type="1115" id="rec1381696801" style="padding-top:30px;padding-bottom:150px;background-color:#1c4130; "> <!-- t1115 --> <div class="t1115"> <div class="t-container t-container_flex t1115__container_vmiddle"> <div class="t-col t-col_7"> <div class="t1115__content"> <div class="t1115__textwrapper t-align_left"> <div class="t1115__uptitle t-uptitle t-uptitle_sm" field="subtitle"> <div data-customstyle="yes" style="font-size: 40px;">3-4</div> </div> <h2 class="t1115__title t-title t-title_xs" field="btitle">أسس التعلّم</h2> </div> <ul class="t1115__features" role="list"> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__4512320053660" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__4512320053660">مبادئ القراءة والكتابة والتواصل</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__4512320053660">يبدأ الأطفال بتمييز الحروف وتطوير مهارات الكتابة المبكرة والتعبير عن أفكارهم بوضوح. نقدم أنشطة «Education Starts Here» التي تدعم الكتابة المبكرة عبر تمارين عملية ممتعة ورواية القصص.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__4512320053661" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__4512320053661">بدايات الحساب وحل المشكلات</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__4512320053661">يستكشف الأطفال مفاهيم حسابية بسيطة كالعد والأشكال والأنماط. نشجع ذلك عبر أنشطة مرحة ومهام عملية وألعاب تفاعلية تجعل التعلم ذا معنى.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__4512320053662" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__4512320053662">الفضول وبدايات العلوم</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__4512320053662">يهتم الأطفال باكتشاف كيف تعمل الأشياء، ويستكشفون الطبيعة والمواد والتجارب البسيطة. نغذي هذا الفضول باستكشاف موجَّه وأنشطة حسية وتجارب مناسبة للعمر.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__4512320053663" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__4512320053663">المهارات الاجتماعية والنمو العاطفي</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__4512320053663">يشارك الأطفال في اللعب التعاوني والتخيلي، ويديرون مشاعرهم ويتناوبون وينمّون التعاطف. ندعم ذلك بالأنشطة الجماعية ولعب الأدوار والحوارات الموجَّهة حول المشاعر.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__1755682968403" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__1755682968403">النمو البدني والتناسق</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__1755682968403">تواصل المهارات الحركية الكبرى والدقيقة تقدمها عبر التسلق والجري والرسم واستخدام الأدوات والألعاب. نوفر في الحضانة مساحة ومعدات وأنشطة وافية لتقوية التناسق والثقة والتحكم.</div> </div> </li> </ul> <div class="t1115__buttons"> <a class="t-btn t-btnflex t-btnflex_type_button t-btnflex_md pp-to-form" href="#pp-form"><span class="t-btnflex__text">اطلب قائمة الأسعار</span> <style>#rec1381696801 .t-btnflex.t-btnflex_type_button{color:#f3f1e3;border-style:solid !important;border-color:#f3f1e3 !important;--border-width:1px;border-radius:0px;box-shadow:none !important;font-family:Montserrat;transition-duration:0.2s;transition-property:background-color,color,border-color,box-shadow,opacity,transform,gap;transition-timing-function:ease-in-out;}@media (hover:hover){#rec1381696801 .t-btnflex.t-btnflex_type_button:not(.t-animate_no-hover):hover{color:#f4f1e3 !important;border-color:#c4a362 !important;background-color:#c4a362 !important;}#rec1381696801 .t-btnflex.t-btnflex_type_button:not(.t-animate_no-hover):focus-visible{color:#f4f1e3 !important;border-color:#c4a362 !important;background-color:#c4a362 !important;}}</style></a> </div> </div> </div> <div class="t-col t-col_5 t1115__col-bottom"> <img alt="طفل في FS1 (3–4 سنوات) في حضانة بادينغتون بارك البريطانية" class="t1115__image t-img" data-original="https://static.tildacdn.com/tild6239-6563-4863-b130-326364313037/4.png" decoding="async" imgfield="img5" loading="lazy" src="https://static.tildacdn.com/tild6239-6563-4863-b130-326364313037/4.png"/> </div> </div> </div> <style>#rec1381696801 .t1115__uptitle{font-size:18px;color:#c4a362;font-family:'Montserrat';text-transform:uppercase;}#rec1381696801 .t1115__title{color:#f4f1e3;}#rec1381696801 .t1115__feature-title{color:#c4a362;font-family:'Garamond';}#rec1381696801 .t1115__feature-descr{font-size:14px;color:#f4f1e3;font-family:'Montserrat';}</style> </div> <div class="r t-rec t-rec_pt_30 t-rec_pb_150 pp-age" data-bg-color="#1c4130" data-record-type="1115" id="rec1381696821" style="padding-top:30px;padding-bottom:150px;background-color:#1c4130; "> <!-- t1115 --> <div class="t1115"> <div class="t-container t-container_flex t1115__container_vmiddle"> <div class="t-col t-col_7"> <div class="t1115__content"> <div class="t1115__textwrapper t-align_left"> <div class="t1115__uptitle t-uptitle t-uptitle_sm" field="subtitle"> <div data-customstyle="yes" style="font-size: 40px;">4-5</div> </div> <h2 class="t1115__title t-title t-title_xs" field="btitle">جاهز للمدرسة بثقة</h2> </div> <ul class="t1115__features" role="list"> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__3912320228960" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__3912320228960">القراءة ومهارات الكتابة</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__3912320228960">يقرأ الأطفال كلمات بسيطة ويكتبون جملاً قصيرة ويتحدثون بثقة. يعزز برنامج «Education Starts Here» الكتابة والقراءة عبر أنشطة موجَّهة ورواية القصص وتمارين إبداعية.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__3912320228961" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__3912320228961">الحساب وحل المشكلات</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__3912320228961">يتعامل الأطفال مع الأعداد والأشكال والأنماط والعمليات البسيطة، وينمّون التفكير المنطقي. نقدم تحديات حسابية مرحة وألعاب عدّ ومهام عملية تجعل التعلم جاذباً وذا معنى.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__2412320228962" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__2412320228962">الاستكشاف العلمي والفضول</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__2412320228962">يستكشف الأطفال السبب والنتيجة والطبيعة والمواد والتجارب البسيطة، ويطرحون الأسئلة ويبحثون عن الإجابات. نشجع الفضول بأنشطة علمية عملية واستقصاءات واستكشاف في الهواء الطلق.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__2412320228963" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__2412320228963">الفنون والنمو الإبداعي</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__2412320228963">يعبّر الأطفال عن أنفسهم بالرسم والتلوين والموسيقى والرقص واللعب التخيلي، فينمو الإبداع والتعبير عن الذات. نوفر فرصاً غنية للفن والموسيقى ولعب الأدوار جنباً إلى جنب مع التعلم.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__2412320228964" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__2412320228964">المهارات الاجتماعية والعاطفية والتعاونية</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__2412320228964">يدير الأطفال مشاعرهم ويظهرون التعاطف ويتعاونون ضمن مجموعات وينمّون مهارات القيادة. ندعم النمو الاجتماعي بأنشطة العمل الجماعي ولعب الأدوار والحوارات الموجَّهة، استعداداً للحياة المدرسية.</div> </div> </li> <li class="t1115__feature t1115__feature_icon-left t-item"> <div class="t1115__feature-icon-wrap"> <img alt="" class="t1115__feature-img t-img" data-color="#c4a362" data-original="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" imgfield="li_img__1755683462258" src="https://static.tildacdn.com/lib/icons/bullets/diamond.svg" style=" margin-top: 3.5px"/> </div> <div class="t1115__feature-text-wrap"> <h3 class="t1115__feature-title t-name t-name_md" field="li_title__1755683462258">النمو البدني والتناسق</h3> <div class="t1115__feature-descr t-descr t-descr_sm" field="li_descr__1755683462258">يصقل الأطفال مهاراتهم الحركية الكبرى والدقيقة، من التوازن والتناسق إلى الرسم والقص. نوفر وقتاً ومساحة وأنشطة كافية لتعزيز التحكم والثقة والجاهزية البدنية للمدرسة.</div> </div> </li> </ul> <div class="t1115__buttons"> <a class="t-btn t-btnflex t-btnflex_type_button t-btnflex_md pp-to-form" href="#pp-form"><span class="t-btnflex__text">اطلب قائمة الأسعار</span> <style>#rec1381696821 .t-btnflex.t-btnflex_type_button{color:#f3f1e3;border-style:solid !important;border-color:#f3f1e3 !important;--border-width:1px;border-radius:0px;box-shadow:none !important;font-family:Montserrat;transition-duration:0.2s;transition-property:background-color,color,border-color,box-shadow,opacity,transform,gap;transition-timing-function:ease-in-out;}@media (hover:hover){#rec1381696821 .t-btnflex.t-btnflex_type_button:not(.t-animate_no-hover):hover{color:#f4f1e3 !important;border-color:#c4a362 !important;background-color:#c4a362 !important;}#rec1381696821 .t-btnflex.t-btnflex_type_button:not(.t-animate_no-hover):focus-visible{color:#f4f1e3 !important;border-color:#c4a362 !important;background-color:#c4a362 !important;}}</style></a> </div> </div> </div> <div class="t-col t-col_5 t1115__col-bottom"> <img alt="طفل في FS2 (4–5 سنوات) في بادينغتون بارك، جاهز للمدرسة" class="t1115__image t-img" data-original="https://static.tildacdn.com/tild6639-3161-4938-b734-623936333037/5.png" decoding="async" imgfield="img5" loading="lazy" src="https://static.tildacdn.com/tild6639-3161-4938-b734-623936333037/5.png"/> </div> </div> </div> <style>#rec1381696821 .t1115__uptitle{font-size:18px;color:#c4a362;font-family:'Montserrat';text-transform:uppercase;}#rec1381696821 .t1115__title{color:#f4f1e3;}#rec1381696821 .t1115__feature-title{color:#c4a362;font-family:'Garamond';}#rec1381696821 .t1115__feature-descr{font-size:14px;color:#f4f1e3;font-family:'Montserrat';}</style> </div> <!-- nominify end -->
