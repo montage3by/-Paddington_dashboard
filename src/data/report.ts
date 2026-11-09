@@ -40,7 +40,10 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
  * subtracting a one-day (11 Oct) estimate taken from the 6–11 Oct
  * window's daily average. Treat all three Oct windows as rougher
  * estimates than the Aug/Sep windows, which came from direct
- * non-overlapping screenshots.
+ * non-overlapping screenshots. The 3–8 Nov window comes from a 1–8 Nov
+ * screenshot minus a two-day (1–2 Nov) estimate taken from the
+ * 26 Oct–2 Nov window's daily average (Summer Camp | Indoor Preschool
+ * backed out from the account-total gap first, as above).
  *
  * Lead rows: exact per-row dates from CRM exports for 20 Aug onward,
  * filtered to Google Ads (utm_source=google&utm_medium=cpc, attributed
@@ -60,7 +63,7 @@ import type { CampaignRow, LeadRow } from "@/lib/types";
 
 export const REPORT_CURRENCY = "AED";
 export const DATA_MIN_DATE = "2026-08-01";
-export const DATA_MAX_DATE = "2026-11-02";
+export const DATA_MAX_DATE = "2026-11-08";
 
 function datesBetween(start: string, end: string): string[] {
   const dates: string[] = [];
@@ -100,6 +103,7 @@ const windowOct2 = datesBetween("2026-10-06", "2026-10-11"); // derived totals f
 const windowOct3 = datesBetween("2026-10-12", "2026-10-18"); // derived totals for 12–18 Oct (see header note)
 const windowOct4 = datesBetween("2026-10-19", "2026-10-25"); // derived totals for 19–25 Oct (see header note)
 const windowOct5 = datesBetween("2026-10-26", "2026-11-02"); // derived totals for 26 Oct–2 Nov (see header note)
+const windowNov1 = datesBetween("2026-11-03", "2026-11-08"); // derived totals for 3–8 Nov (see header note)
 
 const CAMPAIGN = {
   genericDubai: "PPD | Search | Generic Dubai",
@@ -218,6 +222,16 @@ export const campaignRows: CampaignRow[] = [
   ...spread(CAMPAIGN.premium, "Активна", { impressions: 302.08, clicks: 10.55, cost: 49.87 }, windowOct5),
   ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 6.49, clicks: 0, cost: 0 }, windowOct5),
   ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 125.20, clicks: 3.26, cost: 8.69 }, windowOct5),
+
+  ...spread(CAMPAIGN.ageSpecific, "Активна", { impressions: 414.32, clicks: 17.75, cost: 142.04 }, windowNov1),
+  ...spread(CAMPAIGN.brand, "Активна", { impressions: 103.75, clicks: 25.48, cost: 20.40 }, windowNov1),
+  ...spread(CAMPAIGN.eyfs, "Активна", { impressions: 542.83, clicks: 38.43, cost: 89.04 }, windowNov1),
+  ...spread(CAMPAIGN.genericDubai, "Активна", { impressions: 368.48, clicks: 13.82, cost: 398.44 }, windowNov1),
+  ...spread(CAMPAIGN.locationCore, "Активна", { impressions: 353.19, clicks: 43.58, cost: 165.94 }, windowNov1),
+  ...spread(CAMPAIGN.nearMe, "Активна", { impressions: 1237.87, clicks: 45.40, cost: 114.49 }, windowNov1),
+  ...spread(CAMPAIGN.premium, "Активна", { impressions: 195.48, clicks: 3.36, cost: 18.59 }, windowNov1),
+  ...spread(CAMPAIGN.summerCampAges, "Активна", { impressions: 8.38, clicks: 0, cost: 0 }, windowNov1),
+  ...spread(CAMPAIGN.summerCampIndoor, "Активна", { impressions: 82.70, clicks: 2.19, cost: 6.60 }, windowNov1),
 
   // Paused all along — always shown (date: null rows aren't range-filtered), zero spend
   { date: null, campaign: "PPD | Search | Montessori Reggio", status: "Пауза", impressions: 0, clicks: 0, cost: 0, conversions: 0 },
@@ -439,6 +453,9 @@ const datedLeads: [string, string, string][] = [
   ["2026-10-29", CAMPAIGN.unknown, "VIRTUAL TOUR"],
   ["2026-10-30", CAMPAIGN.unknown, "VIRTUAL TOUR"],
   ["2026-11-02", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
+  ["2026-11-05", CAMPAIGN.unknown, "VIRTUAL TOUR"],
+  ["2026-11-06", CAMPAIGN.locationCore, "VIRTUAL TOUR"],
+  ["2026-11-08", CAMPAIGN.gbp, "VIRTUAL TOUR"],
 ];
 
 export const leadRows: LeadRow[] = [
@@ -476,6 +493,7 @@ export const periodComparison = [
   { label: "12–18 окт", cost: 2735, clicks: 357, leads: 5, cpl: 547 },
   { label: "19–25 окт", cost: 2389, clicks: 343, leads: 8, cpl: 299 },
   { label: "26 окт–2 ноя", cost: 2124, clicks: 384, leads: 6, cpl: 354 },
+  { label: "3–8 ноя", cost: 956, clicks: 190, leads: 3, cpl: 319 },
 ];
 
 // Отдельный источник данных: выгрузка Zoho CRM "Предварительные контакты"
