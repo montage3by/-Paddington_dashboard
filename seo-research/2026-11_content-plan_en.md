@@ -43,7 +43,7 @@ Topics were chosen using Google Trends data for Dubai over the last 12 months, t
 | Wed 11 Nov | KHDA and Nurseries: How to Check a Nursery's Licence and What "KHDA Rating" Means | 1 |
 | Fri 13 Nov | Winter Camp in Dubai 2026 for Toddlers and Preschoolers: How to Choose | 2 |
 | Mon 16 Nov | How to Choose a British Nursery in Dubai: A Guide for Families New to the City | 3 |
-| Wed 18 Nov | EYFS, FS1 and FS2 Explained: Should Your Child Do FS1 at Nursery or School? | 4 |
+| Wed 18 Nov | How a British Nursery Works: The EYFS and How It Compares with Montessori | 4 |
 | Fri 20 Nov | Nursery Fees in Dubai 2026–27: What's Included and How to Compare | 5 |
 | Mon 23 Nov | Baby Nursery in Dubai from 45 Days: A Guide for Parents Going Back to Work | 6 |
 
@@ -59,7 +59,7 @@ Topics were chosen using Google Trends data for Dubai over the last 12 months, t
 | 1. KHDA | khda rating · khda nursery · licensed nursery | 40 (mostly about school ratings) | Informational, trust |
 | 2. Winter camp | winter camp · winter camp dubai · winter camp near me | Seasonal: peaked at 143 last December | Commercial, seasonal |
 | 3. Choosing a British nursery | how to choose a british nursery · best nursery dubai · nursery al barsha | Draws on the *british nursery* (27) and *nursery in dubai* (26) cluster | Commercial research |
-| 4. EYFS / FS1 | eyfs · fs1 · fs1 age dubai | 19 · 19 | Informational |
+| 4. EYFS vs Montessori | eyfs · british curriculum · montessori · fs1 / fs2 | 19 · 48 (mostly schools) · 52 (broad) · 19 | Informational |
 | 5. Fees | nursery fees · nursery fees dubai | 8.5 | Commercial research |
 | 6. Baby nursery | baby nursery · baby nursery near me · infant care dubai | 1.5, growing (*baby nursery near me* +130% year on year) | Commercial |
 
@@ -149,22 +149,23 @@ Each article has its own keyword group, so the articles don't compete with each 
 
 ### Article 4 — Wed 18 November
 
-**EYFS, FS1 and FS2 Explained: Should Your Child Do FS1 at Nursery or School?**
+**How a British Nursery Works: The EYFS and How It Compares with Montessori**
 
-**Why this topic.** *EYFS* and *FS1* each attract about twice the search interest of *nursery fees* in Dubai. The UAE's new age cut-off rules for FS1 and FS2 have left many parents unsure what to do. Paddington Park follows EYFS through to FS2, so it can offer a real alternative to an early move to school, and the article explains the choice clearly.
+**Why this topic.** Dubai parents search for early years approaches more than for comparisons between them. *Montessori* and *British curriculum* each attract around half the interest of *nursery dubai*, and *EYFS* is a steady informational search. A clear explanation of how the EYFS works, set against Montessori without judging either, helps parents understand what a British nursery offers. It also shows Paddington Park's path from 45 days to FS2.
 
 **Structure**
-- H1 EYFS, FS1 and FS2 Explained
-  - H2 EYFS in simple terms: the areas of learning
-  - H2 FS1 and FS2: ages and the 2026 UAE cut-off rules
-  - H2 FS1 at nursery or at school: pros and cons
-  - H2 How to tell your child is ready for school
-  - H2 FS1–FS2 at Paddington Park
-  - H2 FAQ
+- H1 How a British Nursery Works: The EYFS and How It Compares with Montessori
+  - H2 What is the EYFS?
+    - H3 Seven areas of learning
+    - H3 Learning through play
+    - H3 A key person
+  - H2 EYFS vs Montessori
+  - H2 From EYFS to FS1 and FS2
+  - H2 The EYFS at Paddington Park
 
-**SEO Title:** EYFS, FS1 & FS2 Explained: Nursery or School in Dubai?
-**Meta Description:** What EYFS, FS1 and FS2 mean, the new UAE age cut-off rules, and how to decide whether your child should start FS1 at nursery or at school in Dubai.
-**CTA:** Talk to our Head Teacher about FS1–FS2. Book a visit.
+**SEO Title:** EYFS vs Montessori: How a British Nursery Works | Dubai Guide
+**Meta Description:** What is the EYFS and how does a British nursery work? The British curriculum for under-5s, how it compares with Montessori, and the path to FS2.
+**CTA:** Book a tour and see a day at Paddington Park.
 
 ---
 
