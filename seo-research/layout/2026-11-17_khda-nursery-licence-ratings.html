@@ -1,0 +1,313 @@
+<!-- nominify begin -->
+<!--
+  Paddington Park blog · Article 1 · KHDA and Nurseries in Dubai
+  Paste the whole file into a Tilda HTML block (T123) on the page /blog/khda-nursery-licence-ratings.
+  Page settings: see seo-research/layout/README.md
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap">
+<style>
+.ppb{--green:#1c4130;--cream:#f4f1e3;--paper:#fffbf1;--gold:#c4a362;--sage:#a8bea2;--line:rgba(28,65,48,.16);
+  background:var(--cream);color:var(--green);font-family:'Montserrat',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.ppb *{box-sizing:border-box}
+.ppb a{color:var(--green);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px;text-decoration-thickness:1px;transition:color .2s}
+.ppb a:hover{color:#2e5a45;text-decoration-thickness:2px}
+.ppb__in{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* hero */
+.ppb-hero{background:var(--green);color:var(--cream);padding:64px 0 72px}
+.ppb-crumbs{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 40px;color:rgba(244,241,227,.7)}
+.ppb-crumbs a{color:rgba(244,241,227,.7);text-decoration:none}
+.ppb-crumbs a:hover{color:var(--gold)}
+.ppb-crumbs span{margin:0 8px;color:var(--gold)}
+.ppb-up{font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 18px}
+.ppb-hero h1{font-family:'Cormorant Garamond',Garamond,serif;font-weight:600;font-size:60px;line-height:1.04;margin:0 0 26px;max-width:18ch;color:var(--cream)}
+.ppb-lead{font-size:18px;line-height:1.65;max-width:62ch;margin:0;color:rgba(244,241,227,.92)}
+.ppb-meta{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:34px;padding-top:22px;border-top:1px solid rgba(244,241,227,.2);
+  font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:rgba(244,241,227,.75)}
+
+.ppb-hero__grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:56px;align-items:end}
+.ppb-hero__photo{margin:0;aspect-ratio:4/5;overflow:hidden;background:#2e5a45}
+.ppb-hero__photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.ppb-fig{margin:30px 0 34px}
+.ppb-fig_pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ppb-fig img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#e6e2d0}
+.ppb-fig figcaption{grid-column:1/-1;font-size:13px;line-height:1.5;color:rgba(28,65,48,.75);padding-top:4px}
+/* layout */
+.ppb-body{padding:72px 0 88px}
+.ppb-grid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:72px;align-items:start}
+.ppb-toc{position:sticky;top:100px;font-size:14px;line-height:1.5}
+.ppb-toc p{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin:0 0 16px}
+.ppb-toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+.ppb-toc li{margin:0}
+.ppb-toc a{display:block;padding:7px 0 7px 16px;margin-left:-1px;border-left:2px solid transparent;text-decoration:none;color:rgba(28,65,48,.75)}
+.ppb-toc a:hover{color:var(--green);border-left-color:var(--gold)}
+
+/* article text */
+.ppb-art{max-width:720px}
+.ppb-art h2{font-family:'Cormorant Garamond',Garamond,serif;font-weight:600;font-size:40px;line-height:1.1;margin:64px 0 18px;scroll-margin-top:100px}
+.ppb-art h2:first-child{margin-top:0}
+.ppb-art h3{font-family:'Cormorant Garamond',Garamond,serif;font-weight:600;font-size:26px;line-height:1.2;margin:36px 0 10px}
+.ppb-art p{font-size:17px;line-height:1.75;margin:0 0 18px}
+.ppb-art strong{font-weight:600}
+
+/* answer card */
+.ppb-answer{background:var(--paper);border:1px solid var(--line);padding:28px 32px;margin:8px 0 26px}
+.ppb-answer__label{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#8a6f35;margin:0 0 8px}
+.ppb-answer p{margin:0}
+.ppb-answer p.ppb-answer__big{font-family:'Cormorant Garamond',Garamond,serif;font-size:30px;font-weight:600;line-height:1.15;margin:0 0 10px}
+
+/* rating scale */
+.ppb-scale{margin:6px 0 28px}
+.ppb-scale ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.ppb-scale li{background:var(--green);color:var(--cream);font-size:12px;font-weight:600;letter-spacing:.5px;text-align:center;padding:14px 6px;line-height:1.3}
+.ppb-scale li:nth-child(2){background:#2e5a45}.ppb-scale li:nth-child(3){background:#4f7a62}
+.ppb-scale li:nth-child(4){background:var(--sage);color:var(--green)}.ppb-scale li:nth-child(5){background:#d6dfcf;color:var(--green)}
+.ppb-scale li:nth-child(6){background:var(--paper);color:var(--green);border:1px solid var(--line)}
+.ppb-scale__cap{display:flex;justify-content:space-between;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-top:8px;color:rgba(28,65,48,.7)}
+
+/* check steps */
+.ppb-steps{list-style:none;margin:14px 0 8px;padding:0;display:grid;gap:14px;counter-reset:s}
+.ppb-steps li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:18px;background:var(--paper);border:1px solid var(--line);padding:22px 24px;counter-increment:s}
+.ppb-steps li::before{content:counter(s,decimal-leading-zero);font-family:'Cormorant Garamond',Garamond,serif;font-size:36px;font-weight:600;line-height:1;color:var(--gold)}
+.ppb-steps h3{margin:0 0 6px}
+.ppb-steps p{margin:0;font-size:16px;line-height:1.65}
+
+/* questions */
+.ppb-list{list-style:none;margin:6px 0 22px;padding:0}
+.ppb-list li{position:relative;padding:12px 0 12px 36px;border-bottom:1px solid var(--line);font-size:17px;line-height:1.55}
+.ppb-list li::before{content:"";position:absolute;left:0;top:16px;width:16px;height:16px;border:1.5px solid var(--gold)}
+
+/* faq */
+.ppb-faq{border-top:1px solid var(--line);margin-top:8px}
+.ppb-faq details{border-bottom:1px solid var(--line)}
+.ppb-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 0;
+  font-family:'Cormorant Garamond',Garamond,serif;font-size:24px;font-weight:600;line-height:1.25}
+.ppb-faq summary::-webkit-details-marker{display:none}
+.ppb-faq summary::after{content:"+";font-family:'Montserrat',Arial,sans-serif;font-size:24px;font-weight:400;color:var(--gold);flex:none;transition:transform .2s}
+.ppb-faq details[open] summary::after{transform:rotate(45deg)}
+.ppb-faq details p{margin:0 0 22px;max-width:62ch}
+.ppb-faq summary:focus-visible,.ppb-btn:focus-visible,.ppb a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* cta */
+.ppb-cta{background:var(--sage);padding:88px 0 96px}
+.ppb-cta__box{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px 72px;align-items:end}
+.ppb-cta h2{font-family:'Cormorant Garamond',Garamond,serif;font-weight:500;font-size:56px;line-height:1.05;margin:0 0 18px}
+.ppb-cta p{font-size:17px;line-height:1.65;margin:0;max-width:52ch}
+.ppb-facts{list-style:none;margin:0 0 30px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:18px 24px}
+.ppb-facts li{border-top:1px solid rgba(28,65,48,.3);padding-top:12px;font-size:14px;line-height:1.45}
+.ppb-facts b{display:block;font-family:'Cormorant Garamond',Garamond,serif;font-size:26px;font-weight:600;line-height:1.1;margin-bottom:2px}
+.ppb-btns{display:flex;flex-wrap:wrap;gap:12px}
+.ppb .ppb-btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;font-size:14px;font-weight:500;letter-spacing:1px;
+  text-transform:uppercase;text-decoration:none;border:1px solid var(--green);transition:background-color .2s,color .2s,border-color .2s}
+.ppb .ppb-btn_fill{background:var(--green);color:var(--cream)}
+.ppb .ppb-btn_fill:hover{background:var(--gold);border-color:var(--gold);color:var(--cream)}
+.ppb .ppb-btn_line{background:transparent;color:var(--green)}
+.ppb .ppb-btn_line:hover{background:var(--green);color:var(--cream)}
+.ppb-note{font-size:12px;line-height:1.6;color:rgba(28,65,48,.7);margin-top:48px;max-width:720px}
+
+@media (max-width:980px){
+  .ppb-hero__grid{grid-template-columns:minmax(0,1fr);gap:36px}
+  .ppb-hero__photo{aspect-ratio:3/2}
+  .ppb-grid{grid-template-columns:minmax(0,1fr);gap:0}
+  .ppb-toc{display:none}
+  .ppb-cta__box{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .ppb-hero{padding:40px 0 48px}
+  .ppb-crumbs{margin-bottom:28px}
+  .ppb-hero h1{font-size:40px}
+  .ppb-fig_pair{gap:8px}
+  .ppb-lead{font-size:16px}
+  .ppb-body{padding:48px 0 64px}
+  .ppb-art h2{font-size:32px;margin-top:48px}
+  .ppb-art h3{font-size:23px}
+  .ppb-art p,.ppb-list li{font-size:16px}
+  .ppb-answer{padding:22px 20px}
+  .ppb-answer p.ppb-answer__big{font-size:26px}
+  .ppb-scale ol{grid-template-columns:repeat(3,1fr)}
+  .ppb-steps li{grid-template-columns:40px minmax(0,1fr);padding:18px;gap:12px}
+  .ppb-steps li::before{font-size:28px}
+  .ppb-faq summary{font-size:21px}
+  .ppb-cta{padding:56px 0 64px}
+  .ppb-cta h2{font-size:40px}
+  .ppb .ppb-btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){.ppb *{transition:none !important}}
+</style>
+
+<article class="ppb" itemscope itemtype="https://schema.org/Article">
+
+  <header class="ppb-hero">
+    <div class="ppb__in">
+      <nav class="ppb-crumbs" aria-label="Breadcrumb">
+        <a href="https://paddingtonparkdubai.com/">Home</a><span>/</span><a href="https://paddingtonparkdubai.com/blog">Parent guides</a><span>/</span>KHDA and nurseries
+      </nav>
+      <div class="ppb-hero__grid"><div>
+      <p class="ppb-up">Parent guide</p>
+      <h1 itemprop="headline">KHDA and Nurseries in Dubai: Licences, Ratings and What to Check</h1>
+      <p class="ppb-lead">Choosing a nursery in Dubai often starts with one question: what is its KHDA rating? It's a fair question, because Dubai parents are used to checking school ratings before they apply. For nurseries the answer is a little different. Here's what KHDA does, what a licence tells you, and what you can check yourself before you sign up.</p>
+      <div class="ppb-meta">
+        <span><time itemprop="datePublished" datetime="2026-11-17">17 November 2026</time></span>
+        <span>4 min read</span>
+        <span>Paddington Park, Arjan</span>
+      </div>
+      </div>
+      <figure class="ppb-hero__photo"><img src="https://optim.tildacdn.com/tild6539-3365-4038-b165-343335626636/-/resize/800x/-/format/webp/noroot.png.webp" alt="Paddington Park nursery building in Arjan, Al Barsha South" width="744" height="1322" itemprop="image"></figure>
+      </div>
+    </div>
+  </header>
+
+  <div class="ppb-body">
+    <div class="ppb__in ppb-grid">
+
+      <aside class="ppb-toc" aria-label="In this guide">
+        <p>In this guide</p>
+        <ol>
+          <li><a href="#what-is-khda">What is KHDA?</a></li>
+          <li><a href="#khda-and-nurseries">What KHDA does for nurseries</a></li>
+          <li><a href="#khda-rating">Is there a KHDA rating for nurseries?</a></li>
+          <li><a href="#check-licence">How to check a licensed nursery</a></li>
+          <li><a href="#tour-questions">Questions to ask on a tour</a></li>
+          <li><a href="#faq">Frequently asked questions</a></li>
+        </ol>
+      </aside>
+
+      <div class="ppb-art" itemprop="articleBody">
+
+        <h2 id="what-is-khda">What is KHDA?</h2>
+        <p>KHDA is the Knowledge and Human Development Authority, the government body that regulates private education in Dubai. It licenses private schools and nurseries, inspects schools, publishes school ratings and sets the rules that education providers follow.</p>
+        <p>For parents of young children, KHDA matters because it decides who can open a nursery, which ages a nursery can accept and what standards it has to meet.</p>
+
+        <h2 id="khda-and-nurseries">What KHDA does for nurseries</h2>
+        <p>KHDA calls nurseries early childhood centres. Every early childhood centre in Dubai needs a KHDA permit to operate, and the rules for early childhood care and education were updated in 2026.</p>
+        <p>A licensed nursery can welcome children from <strong>45 days to six years old</strong>. That covers babies, toddlers and the preschool years, up to the age when most children move into Year 1 or Grade 1 at school.</p>
+        <p>The choice keeps growing. In the 2024–25 academic year, Dubai had 29,634 children in 312 private nurseries, and 17 new centres are opening for 2026–27. More choice is good news, but it also means more checking.</p>
+
+
+        <figure class="ppb-fig ppb-fig_pair"><img src="https://optim.tildacdn.com/tild3464-3666-4439-b339-353834376335/-/resize/800x/-/format/webp/3.jpg.webp" alt="Classroom with a sensory table and floor cushions at Paddington Park nursery in Arjan" loading="lazy" width="800" height="1200"><img src="https://optim.tildacdn.com/tild6139-3564-4034-a464-633665633235/-/resize/800x/-/format/webp/1.jpg.webp" alt="Cosy reading house with floor cushions in a Paddington Park classroom" loading="lazy" width="800" height="1200"><figcaption>Classrooms at Paddington Park, a licensed early childhood centre in Arjan.</figcaption></figure>
+        <h2 id="khda-rating">Is there a KHDA rating for nurseries?</h2>
+        <div class="ppb-answer">
+          <p class="ppb-answer__label">Short answer</p>
+          <p class="ppb-answer__big">Not yet.</p>
+          <p>Schools in Dubai receive a public KHDA school rating. Nurseries don't have an equivalent rating today.</p>
+        </div>
+        <p>The KHDA school rating uses a six-point scale:</p>
+        <div class="ppb-scale" aria-label="KHDA school rating scale, from highest to lowest">
+          <ol>
+            <li>Outstanding</li><li>Very good</li><li>Good</li><li>Acceptable</li><li>Weak</li><li>Very weak</li>
+          </ol>
+          <div class="ppb-scale__cap"><span>Highest</span><span>Lowest</span></div>
+        </div>
+        <p>Instead, KHDA's Quality Framework for Early Childhood Care and Education, approved in 2026, describes what good early years care looks like. KHDA plans to build future quality reviews of nurseries on this framework. Until then, a nursery's KHDA rating isn't something you can look up.</p>
+
+        <h3>What "KHDA approved" means</h3>
+        <p>When a nursery says it's KHDA approved, it means the nursery holds a valid licence. That's an important starting point, but it isn't a quality grade. Two licensed nurseries can feel very different, so the visit and your own questions still matter.</p>
+
+        <h3>Nurseries and school foundation stages</h3>
+        <p>Some families compare a standalone nursery with the FS1 and FS2 classes at a British school. The school will have a KHDA school rating for the school as a whole. A nursery won't, even if it teaches the same British curriculum up to FS2.</p>
+
+        <h2 id="check-licence">How to check a licensed nursery</h2>
+        <ol class="ppb-steps">
+          <li><div><h3>Ask for the permit number</h3><p>Any licensed nursery will share its permit number, and many display it at reception. If a nursery can't tell you its number, treat that as a reason to look more closely.</p></div></li>
+          <li><div><h3>Use the KHDA directory</h3><p>Look the nursery up in the <a href="https://web.khda.gov.ae/en/Education-Directory/Early-Childhood-Centres-(ECC)" target="_blank" rel="noopener">KHDA directory</a> on the KHDA website or app. Check that the name, area and branch match the place you visited. Some nursery brands run several centres in different parts of Dubai, so make sure you're looking at the right one.</p></div></li>
+          <li><div><h3>Check who looks after health</h3><p>Ask who handles first aid and medicines during the day, and whether a nurse is on site. In Dubai, nurses are licensed by the Dubai Health Authority (DHA), so it's fair to ask about their certification too.</p></div></li>
+        </ol>
+
+
+        <figure class="ppb-fig ppb-fig_pair"><img src="https://optim.tildacdn.com/tild3832-6665-4439-b566-306238623461/-/resize/800x/-/format/webp/16.jpg.webp" alt="Nurse's medical room at Paddington Park nursery" loading="lazy" width="800" height="1200"><img src="https://optim.tildacdn.com/tild6335-3664-4535-a235-636666313363/-/resize/800x/-/format/webp/17.jpg.webp" alt="Indoor gym for physical development at Paddington Park, Arjan" loading="lazy" width="800" height="1200"><figcaption>Worth seeing on a tour: the medical room and where children play when it is too hot outside.</figcaption></figure>
+        <h2 id="tour-questions">Questions to ask on a tour</h2>
+        <p>A tour tells you more than any listing. Bring a short list and ask the same questions at every nursery you visit:</p>
+        <ul class="ppb-list">
+          <li>What is the staff-to-child ratio for my child's age group?</li>
+          <li>What training and experience do the teachers have?</li>
+          <li>How long have the teachers worked here?</li>
+          <li>Is there a nurse on site, and what happens if my child feels unwell?</li>
+          <li>How much time do children spend outdoors, and where do they play in summer?</li>
+          <li>What does a typical day look like for my child's age?</li>
+          <li>How will you share updates about my child's day?</li>
+          <li>How does the settling-in period work?</li>
+        </ul>
+        <p>For a fuller checklist, read our guide on <a href="https://paddingtonparkdubai.com/blog/choose-british-nursery-dubai">how to choose a British nursery in Dubai</a>.</p>
+
+
+        <figure class="ppb-fig ppb-fig_pair"><img src="https://optim.tildacdn.com/tild3161-6631-4133-b865-313139333032/-/resize/800x/-/format/webp/6.jpg.webp" alt="Wooden swing set in the shaded sand play area at Paddington Park nursery" loading="lazy" width="800" height="1200"><img src="https://optim.tildacdn.com/tild3663-3131-4163-b739-396332643331/-/resize/800x/-/format/webp/7.jpg.webp" alt="Climbing frame with a climbing wall in the outdoor park at Paddington Park" loading="lazy" width="800" height="1200"><figcaption>Ask how much time children spend outdoors. At Paddington Park, the park is part of every day.</figcaption></figure>
+        <h2 id="faq">Frequently asked questions</h2>
+        <div class="ppb-faq">
+          <details open>
+            <summary>Does KHDA rate nurseries in Dubai?</summary>
+            <p>Not at the moment. KHDA rates schools, and it has published a Quality Framework for early childhood care that will guide future reviews of nurseries.</p>
+          </details>
+          <details>
+            <summary>How do I find a KHDA licensed nursery near me?</summary>
+            <p>Search the KHDA directory of early childhood centres by area, then visit the nurseries that are close to home or work.</p>
+          </details>
+          <details>
+            <summary>What ages can a Dubai nursery accept?</summary>
+            <p>A licensed early childhood centre can accept children from 45 days to six years old.</p>
+          </details>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <section class="ppb-cta" aria-labelledby="ppb-visit">
+    <div class="ppb__in ppb-cta__box">
+      <div>
+        <h2 id="ppb-visit">Visit Paddington Park</h2>
+        <p>Paddington Park is a <a href="https://paddingtonparkdubai.com/">British nursery in Arjan</a>, Al Barsha South, for children from 45 days to FS2. Come and see our campus and park, meet our team and our DHA-certified nurse, and ask us anything on your list.</p>
+      </div>
+      <div>
+        <ul class="ppb-facts">
+          <li><b>45 days–FS2</b>British EYFS</li>
+          <li><b>8 AM–7 PM</b>Open daily</li>
+          <li><b>DHA-certified</b>Nurse on campus</li>
+          <li><b>Arjan</b>Al Barsha South 3, Dubai</li>
+        </ul>
+        <div class="ppb-btns">
+          <a class="ppb-btn ppb-btn_fill" href="#pp-form">Book a tour</a>
+          <a class="ppb-btn ppb-btn_line" href="https://wa.me/971521290607?text=Hello%21%20I%27d%20like%20to%20book%20a%20tour%20of%20Paddington%20Park." target="_blank" rel="noopener">WhatsApp us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <meta itemprop="author" content="Paddington Park">
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "KHDA and Nurseries in Dubai: Licences, Ratings and What to Check",
+      "description": "Is there a KHDA rating for nurseries in Dubai? What a KHDA licence means, how to check a licensed nursery and what to ask on a tour.",
+      "datePublished": "2026-11-17",
+      "inLanguage": "en",
+      "mainEntityOfPage": "https://paddingtonparkdubai.com/blog/khda-nursery-licence-ratings",
+      "author": {"@type": "Organization", "name": "Paddington Park", "url": "https://paddingtonparkdubai.com/"},
+      "publisher": {"@type": "Organization", "name": "Paddington Park", "logo": {"@type": "ImageObject", "url": "https://static.tildacdn.com/tild6234-6230-4937-a264-643761353635/Logo_green_svg.svg"}}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "Does KHDA rate nurseries in Dubai?", "acceptedAnswer": {"@type": "Answer", "text": "Not at the moment. KHDA rates schools, and it has published a Quality Framework for early childhood care that will guide future reviews of nurseries."}},
+        {"@type": "Question", "name": "How do I find a KHDA licensed nursery near me?", "acceptedAnswer": {"@type": "Answer", "text": "Search the KHDA directory of early childhood centres by area, then visit the nurseries that are close to home or work."}},
+        {"@type": "Question", "name": "What ages can a Dubai nursery accept?", "acceptedAnswer": {"@type": "Answer", "text": "A licensed early childhood centre can accept children from 45 days to six years old."}}
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://paddingtonparkdubai.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Parent guides", "item": "https://paddingtonparkdubai.com/blog"},
+        {"@type": "ListItem", "position": 3, "name": "KHDA and Nurseries in Dubai"}
+      ]
+    }
+  ]
+}
+</script>
+<!-- nominify end -->

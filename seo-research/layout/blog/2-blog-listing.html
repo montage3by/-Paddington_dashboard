@@ -1,0 +1,262 @@
+<!-- nominify begin -->
+<!--
+  Paddington Park blog · listing page /blog
+  Cards with a future data-publish date are shown as "Coming soon" without a link and switch to a
+  normal link automatically on their publication date. Publish each article page by that date.
+-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap">
+<style>
+.ppl{--green:#1c4130;--cream:#f4f1e3;--paper:#fffbf1;--gold:#c4a362;--sage:#a8bea2;--line:rgba(28,65,48,.16);
+  background:var(--cream);color:var(--green);font-family:'Montserrat',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.ppl *{box-sizing:border-box}
+.ppl__in{max-width:1200px;margin:0 auto;padding:0 20px}
+.ppl a{color:inherit;text-decoration:none}
+
+/* hero */
+.ppl-hero{background:var(--green);color:var(--cream);padding:56px 0 64px}
+.ppl-crumbs{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 36px;color:rgba(244,241,227,.7)}
+.ppl-crumbs a{color:rgba(244,241,227,.7)}
+.ppl-crumbs a:hover{color:var(--gold)}
+.ppl-crumbs span{margin:0 8px;color:var(--gold)}
+.ppl-up{font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.ppl-hero h1{font-family:'Cormorant Garamond',Garamond,serif;font-weight:600;font-size:72px;line-height:1;margin:0 0 22px;color:var(--cream)}
+.ppl-lead{font-size:18px;line-height:1.65;max-width:60ch;margin:0;color:rgba(244,241,227,.92)}
+
+/* topics */
+.ppl-topics{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 40px;padding:0;list-style:none}
+.ppl-topics button{font:inherit;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;
+  background:transparent;color:var(--green);border:1px solid var(--green);padding:11px 18px;transition:background-color .2s,color .2s,border-color .2s}
+.ppl-topics button:hover{border-color:var(--gold);color:#8a6f35}
+.ppl-topics button[aria-pressed="true"]{background:var(--green);color:var(--cream);border-color:var(--green)}
+
+/* list */
+.ppl-body{padding:64px 0 88px}
+.ppl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 28px;list-style:none;margin:0;padding:0}
+.ppl-card{display:flex;flex-direction:column;min-width:0}
+.ppl-card__link{display:flex;flex-direction:column;height:100%}
+.ppl-card__photo{position:relative;aspect-ratio:4/3;overflow:hidden;background:#e6e2d0;margin-bottom:20px}
+.ppl-card__photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+a.ppl-card__link:hover .ppl-card__photo img{transform:scale(1.03)}
+.ppl-card__tag{position:absolute;top:0;left:0;z-index:1;background:var(--green);color:var(--cream);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:9px 14px}
+.ppl-card__meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 10px}
+.ppl-card__meta i{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex:none}
+.ppl-card h2{font-family:'Cormorant Garamond',Garamond,serif;font-weight:600;font-size:28px;line-height:1.15;margin:0 0 12px}
+.ppl-card p{font-size:15px;line-height:1.6;margin:0 0 18px;color:rgba(28,65,48,.85)}
+.ppl-card__more{margin-top:auto;align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  padding:0 0 4px;border-bottom:1px solid var(--gold);transition:color .2s,border-color .2s}
+a.ppl-card__link:hover .ppl-card__more{color:#8a6f35}
+a.ppl-card__link:hover h2{color:#2e5a45}
+a.ppl-card__link:focus-visible{outline:2px solid var(--gold);outline-offset:6px}
+
+/* coming soon */
+.ppl-card_soon .ppl-card__photo img{filter:saturate(.35) brightness(1.05)}
+.ppl-card_soon .ppl-card__tag{background:var(--paper);color:var(--green)}
+.ppl-card_soon .ppl-card__more{border-bottom-color:transparent;color:rgba(28,65,48,.6)}
+
+/* featured: newest published guide */
+.ppl-card_featured{grid-column:1/-1;display:grid}
+.ppl-card_featured .ppl-card__link{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:center}
+.ppl-card_featured .ppl-card__photo{aspect-ratio:3/2;margin:0}
+.ppl-card_featured h2{font-size:44px;line-height:1.05;margin-bottom:16px}
+.ppl-card_featured p{font-size:17px;max-width:46ch}
+.ppl-card_featured .ppl-card__more{background:var(--green);color:var(--cream);border:0;padding:16px 26px;transition:background-color .2s}
+.ppl-card_featured a.ppl-card__link:hover .ppl-card__more{background:var(--gold);color:var(--cream)}
+
+/* cta */
+.ppl-cta{background:var(--sage);padding:80px 0 88px}
+.ppl-cta__box{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px 64px;align-items:end}
+.ppl-cta h2{font-family:'Cormorant Garamond',Garamond,serif;font-weight:500;font-size:52px;line-height:1.05;margin:0 0 16px}
+.ppl-cta p{font-size:17px;line-height:1.65;margin:0;max-width:52ch}
+.ppl-btns{display:flex;flex-wrap:wrap;gap:12px}
+.ppl .ppl-btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 32px;font-size:14px;font-weight:500;letter-spacing:1px;
+  text-transform:uppercase;border:1px solid var(--green);transition:background-color .2s,color .2s,border-color .2s}
+.ppl .ppl-btn_fill{background:var(--green);color:var(--cream)}
+.ppl .ppl-btn_fill:hover{background:var(--gold);border-color:var(--gold)}
+.ppl .ppl-btn_line{color:var(--green)}
+.ppl .ppl-btn_line:hover{background:var(--green);color:var(--cream)}
+.ppl-btn:focus-visible,.ppl-topics button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.ppl-empty{font-size:16px;margin:0}
+
+@media (max-width:980px){
+  .ppl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ppl-card_featured .ppl-card__link{grid-template-columns:minmax(0,1fr);gap:24px}
+  .ppl-cta__box{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .ppl-hero{padding:40px 0 48px}
+  .ppl-hero h1{font-size:48px}
+  .ppl-lead{font-size:16px}
+  .ppl-body{padding:44px 0 64px}
+  .ppl-topics{flex-wrap:nowrap;overflow-x:auto;margin:0 -20px 32px;padding:0 20px 4px;scrollbar-width:none}
+  .ppl-topics::-webkit-scrollbar{display:none}
+  .ppl-topics button{white-space:nowrap}
+  .ppl-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .ppl-card_featured h2{font-size:34px}
+  .ppl-card h2{font-size:26px}
+  .ppl-cta{padding:56px 0 64px}
+  .ppl-cta h2{font-size:38px}
+  .ppl .ppl-btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){.ppl *{transition:none !important}}
+</style>
+
+<div class="ppl">
+  <header class="ppl-hero">
+    <div class="ppl__in">
+      <nav class="ppl-crumbs" aria-label="Breadcrumb"><a href="https://paddingtonparkdubai.com/">Home</a><span>/</span>Parent guides</nav>
+      <p class="ppl-up">Paddington Park blog</p>
+      <h1>Parent Guides</h1>
+      <p class="ppl-lead">Practical guides for families choosing a nursery in Dubai: KHDA licences, the British EYFS, holiday camps and settling in. Written by the team at Paddington Park, a British nursery in Arjan, Al Barsha South.</p>
+    </div>
+  </header>
+
+  <section class="ppl-body" aria-label="All guides">
+    <div class="ppl__in">
+      <ul class="ppl-topics" aria-label="Filter by topic">
+        <li><button type="button" data-topic="all" aria-pressed="true">All guides</button></li>
+        <li><button type="button" data-topic="choosing" aria-pressed="false">Choosing a nursery</button></li>
+        <li><button type="button" data-topic="curriculum" aria-pressed="false">Curriculum</button></li>
+        <li><button type="button" data-topic="camps" aria-pressed="false">Holiday camps</button></li>
+      </ul>
+
+      <ul class="ppl-grid">
+        <li class="ppl-card ppl-card_featured" data-topic="choosing" data-publish="2026-11-17" data-href="https://paddingtonparkdubai.com/blog/khda-nursery-licence-ratings">
+          <a class="ppl-card__link" href="https://paddingtonparkdubai.com/blog/khda-nursery-licence-ratings">
+            <div class="ppl-card__photo"><span class="ppl-card__tag">Choosing a nursery</span><img src="https://optim.tildacdn.com/tild6539-3365-4038-b165-343335626636/-/resize/800x/-/format/webp/noroot.png.webp" alt="Paddington Park nursery building in Arjan, Al Barsha South" loading="lazy" width="800" height="600"></div>
+            <div>
+              <div class="ppl-card__meta"><time datetime="2026-11-17">17 November 2026</time><i></i><span>4 min read</span></div>
+              <h2>KHDA and Nurseries in Dubai: Licences, Ratings and What to Check</h2>
+              <p>Is there a KHDA rating for nurseries? What a KHDA licence means, how to check a licensed nursery, and the questions worth asking on a tour.</p>
+              <span class="ppl-card__more">Read the guide</span>
+            </div>
+          </a>
+        </li>
+
+        <li class="ppl-card" data-topic="camps" data-publish="2026-11-20" data-href="https://paddingtonparkdubai.com/blog/winter-camp-toddlers-dubai">
+          <div class="ppl-card__link">
+            <div class="ppl-card__photo"><span class="ppl-card__tag">Holiday camps</span><img src="https://optim.tildacdn.com/tild3239-3662-4961-b064-326263376466/-/resize/760x/-/format/webp/exec-7c64b1e8-bebe-4.png.webp" alt="Winter Camp for children at Paddington Park, Arjan" loading="lazy" width="760" height="570"></div>
+            <div class="ppl-card__meta"><time datetime="2026-11-20">20 November 2026</time><i></i><span>4 min read</span></div>
+            <h2>Winter Camp in Dubai for Toddlers and Preschoolers: How to Choose</h2>
+            <p>How to choose a winter camp for under-5s in Dubai, what to ask before booking, what to pack, and the dates for the 2026–27 winter break.</p>
+            <span class="ppl-card__more">Read the guide</span>
+          </div>
+        </li>
+
+        <li class="ppl-card" data-topic="choosing" data-publish="2026-11-24" data-href="https://paddingtonparkdubai.com/blog/choose-british-nursery-dubai">
+          <div class="ppl-card__link">
+            <div class="ppl-card__photo"><span class="ppl-card__tag">Choosing a nursery</span><img src="https://optim.tildacdn.com/tild3038-6162-4137-a430-313037356464/-/resize/800x/-/format/webp/2.jpg.webp" alt="EYFS classroom with wooden tables and a play house at Paddington Park, Dubai" loading="lazy" width="800" height="600"></div>
+            <div class="ppl-card__meta"><time datetime="2026-11-24">24 November 2026</time><i></i><span>5 min read</span></div>
+            <h2>How to Choose a British Nursery in Dubai: A Guide for New Families</h2>
+            <p>New to Dubai? What to compare: curriculum, KHDA licence, location, hours, staff and fees, plus how to help your child settle in.</p>
+            <span class="ppl-card__more">Read the guide</span>
+          </div>
+        </li>
+
+        <li class="ppl-card" data-topic="curriculum" data-publish="2026-11-27" data-href="https://paddingtonparkdubai.com/blog/eyfs-british-nursery-vs-montessori">
+          <div class="ppl-card__link">
+            <div class="ppl-card__photo"><span class="ppl-card__tag">Curriculum</span><img src="https://optim.tildacdn.com/tild3832-3663-4664-a664-323262306565/-/resize/800x/-/format/webp/12.jpg.webp" alt="Classroom with child-sized tables and chairs at Paddington Park nursery, Dubai" loading="lazy" width="800" height="600"></div>
+            <div class="ppl-card__meta"><time datetime="2026-11-27">27 November 2026</time><i></i><span>5 min read</span></div>
+            <h2>How a British Nursery Works: The EYFS and How It Compares with Montessori</h2>
+            <p>The seven areas of learning, a typical EYFS day, how it differs from Montessori, and what the new FS1 and FS2 age rules mean.</p>
+            <span class="ppl-card__more">Read the guide</span>
+          </div>
+        </li>
+      </ul>
+      <p class="ppl-empty" hidden>New guides on this topic are coming soon.</p>
+    </div>
+  </section>
+
+  <section class="ppl-cta" aria-labelledby="ppl-visit">
+    <div class="ppl__in ppl-cta__box">
+      <div>
+        <h2 id="ppl-visit">Come and see Paddington Park</h2>
+        <p>A British EYFS nursery in Arjan for children from 45 days to FS2, with a large park, a theatre and an indoor gym on campus. Open daily, 8 AM to 7 PM.</p>
+      </div>
+      <div class="ppl-btns">
+        <a class="ppl-btn ppl-btn_fill" href="#pp-form">Book a tour</a>
+        <a class="ppl-btn ppl-btn_line" href="https://wa.me/971521290607?text=Hello%21%20I%27d%20like%20to%20book%20a%20tour%20of%20Paddington%20Park." target="_blank" rel="noopener">WhatsApp us</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var root=document.querySelector('.ppl'); if(!root||root.__ppl) return; root.__ppl=1;
+  var grid=root.querySelector('.ppl-grid'), empty=root.querySelector('.ppl-empty');
+  var cards=[].slice.call(grid.querySelectorAll('.ppl-card'));
+  // Dubai date, so a guide goes live at midnight in Dubai
+  var today=new Date(Date.now()+4*3600*1000).toISOString().slice(0,10);
+  cards.forEach(function(c){
+    var live=c.getAttribute('data-publish')<=today, box=c.querySelector('.ppl-card__link');
+    if(live && box.tagName!=='A'){
+      var a=document.createElement('a'); a.className=box.className; a.href=c.getAttribute('data-href');
+      while(box.firstChild) a.appendChild(box.firstChild); c.replaceChild(a,box); box=a;
+    }
+    if(!live){
+      c.classList.add('ppl-card_soon');
+      var d=new Date(c.getAttribute('data-publish')+'T00:00:00');
+      var label=d.toLocaleDateString('en-GB',{day:'numeric',month:'long'});
+      c.querySelector('.ppl-card__tag').textContent='Coming '+label;
+      c.querySelector('.ppl-card__more').textContent='Coming soon';
+    }
+    c.__live=live;
+  });
+  // newest live guide first and featured, then other live guides, then upcoming ones
+  cards.sort(function(a,b){
+    if(a.__live!==b.__live) return a.__live?-1:1;
+    var da=a.getAttribute('data-publish'), db=b.getAttribute('data-publish');
+    return a.__live ? (da<db?1:-1) : (da<db?-1:1);
+  });
+  cards.forEach(function(c,i){
+    c.classList.toggle('ppl-card_featured', i===0 && c.__live);
+    if(i===0 && c.__live){
+      var link=c.querySelector('.ppl-card__link'), photo=link.querySelector('.ppl-card__photo');
+      if(photo && photo.nextElementSibling && photo.nextElementSibling.tagName!=='DIV'){
+        var wrap=document.createElement('div');
+        while(photo.nextSibling) wrap.appendChild(photo.nextSibling);
+        link.appendChild(wrap);
+      }
+    }
+    grid.appendChild(c);
+  });
+  // topic filter
+  var btns=[].slice.call(root.querySelectorAll('.ppl-topics button'));
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.getAttribute('data-topic'), shown=0;
+      btns.forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); });
+      cards.forEach(function(c){
+        var on = t==='all' || c.getAttribute('data-topic')===t;
+        c.hidden=!on; if(on) shown++;
+        c.classList.toggle('ppl-card_featured', t==='all' && c===cards[0] && c.__live);
+      });
+      empty.hidden = shown>0;
+    });
+  });
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "name": "Parent Guides",
+      "description": "Practical guides for families choosing a nursery in Dubai: KHDA licences, the British EYFS, holiday camps and settling in.",
+      "url": "https://paddingtonparkdubai.com/blog",
+      "inLanguage": "en",
+      "publisher": {"@type": "Organization", "name": "Paddington Park", "url": "https://paddingtonparkdubai.com/"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://paddingtonparkdubai.com/"},
+        {"@type": "ListItem", "position": 2, "name": "Parent guides", "item": "https://paddingtonparkdubai.com/blog"}
+      ]
+    }
+  ]
+}
+</script>
+<!-- nominify end -->
