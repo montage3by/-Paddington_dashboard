@@ -229,7 +229,7 @@
           <li>How will you share updates about my child's day?</li>
           <li>How does the settling-in period work?</li>
         </ul>
-        <p>For a fuller checklist, read our guide on <a href="https://paddingtonparkdubai.com/blog/choose-british-nursery-dubai">how to choose a British nursery in Dubai</a>.</p>
+        <p>For a fuller checklist, read our guide on <span class="ppb-later" data-publish="2026-11-24" data-href="https://paddingtonparkdubai.com/blog/choose-british-nursery-dubai">how to choose a British nursery in Dubai</span>.</p>
 
 
         <figure class="ppb-fig ppb-fig_pair"><img src="https://optim.tildacdn.com/tild3161-6631-4133-b865-313139333032/-/resize/800x/-/format/webp/6.jpg.webp" alt="Wooden swing set in the shaded sand play area at Paddington Park nursery" loading="lazy" width="800" height="1200"><img src="https://optim.tildacdn.com/tild3663-3131-4163-b739-396332643331/-/resize/800x/-/format/webp/7.jpg.webp" alt="Climbing frame with a climbing wall in the outdoor park at Paddington Park" loading="lazy" width="800" height="1200"><figcaption>Ask how much time children spend outdoors. At Paddington Park, the park is part of every day.</figcaption></figure>
@@ -309,5 +309,16 @@
     }
   ]
 }
+</script>
+<script>
+/* Links to articles that are not published yet stay plain text until their date (Dubai time, UTC+4) */
+(function(){
+  var today=new Date(Date.now()+4*3600e3).toISOString().slice(0,10);
+  document.querySelectorAll('.ppb-later[data-publish]').forEach(function(el){
+    if(el.getAttribute('data-publish')>today) return;
+    var a=document.createElement('a'); a.href=el.getAttribute('data-href'); a.textContent=el.textContent;
+    el.replaceWith(a);
+  });
+})();
 </script>
 <!-- nominify end -->
