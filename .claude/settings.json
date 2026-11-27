@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Windsor_ai_for_Paid_Media__get_data",
+      "mcp__Windsor_ai_for_Paid_Media__get_fields",
+      "mcp__Windsor_ai_for_Paid_Media__get_connectors",
+      "mcp__Windsor_ai_for_Paid_Media__get_options",
+      "mcp__Windsor_ai_for_Paid_Media__get_custom_fields",
+      "mcp__Windsor_ai_for_Paid_Media__list_actions"
+    ]
+  }
+}
